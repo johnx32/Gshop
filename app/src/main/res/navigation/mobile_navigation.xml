@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_categorias"
         android:name="org.jbtc.gshop.ui.categorias.CategoriasFragment"
-        android:label="@string/menu_home"
+        android:label="@string/menu_productos"
         tools:layout="@layout/fragment_categorias" />
 
     <fragment
