@@ -16,6 +16,6 @@
         <item
             android:id="@+id/nav_productos"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Productos" />
+            android:title="@string/menu_productos" />
     </group>
 </menu>
