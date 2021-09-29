@@ -9,5 +9,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_categorias">Categorias</string>
+    <string name="menu_productos">Productos</string>
+
 
 </resources>
