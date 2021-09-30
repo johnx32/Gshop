@@ -12,14 +12,21 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="org.jbtc.gshop.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_categoria"
+        android:name="org.jbtc.gshop.ui.categorias.CategoriasFragment"
+        android:label="@string/menu_categoria"
+        tools:layout="@layout/fragment_slideshow" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="org.jbtc.gshop.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:id="@+id/nav_producto"
+        android:name="org.jbtc.gshop.ui.productos.ProductosFragments"
+        android:label="@string/menu_productos"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_pedido"
+        android:name="org.jbtc.gshop.ui.pedidos.PedidosFragment"
+        android:label="@string/menu_pedidos"
+        tools:layout="@layout/fragment_slideshow" />
+
 </navigation>

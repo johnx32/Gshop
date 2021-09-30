@@ -9,12 +9,16 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_categoria"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_categoria" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_producto"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_productos" />
+        <item
+            android:id="@+id/nav_pedido"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_pedidos" />
     </group>
 </menu>
