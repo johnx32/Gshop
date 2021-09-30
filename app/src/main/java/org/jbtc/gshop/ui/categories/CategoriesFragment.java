@@ -16,9 +16,10 @@ public class CategoriesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding =
+        binding = FragmentCategoriesBinding.inflate(inflater, container, false);
+        return binding.getRoot();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categories, container, false);
+//        return inflater.inflate(R.layout.fragment_categories, container, false);
 
     }
 }
