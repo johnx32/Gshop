@@ -25,6 +25,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="menu_productos">Productos</string>
     <string name="productos">Productos</string>
+    <string name="menu_pedidos">Pedidos</string>
 
     >>>>>>> login
 </resources>
