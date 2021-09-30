@@ -20,16 +20,13 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_login_anibal">LoginAnibal</string>
-    =======
+
     <string name="menu_categorias">Categorias</string>
-<<<<<<< HEAD
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="menu_productos">Productos</string>
     <string name="productos">Productos</string>
-=======
-    <string name="menu_productos">Productos</string>
->>>>>>> login
+
     <string name="menu_pedidos">Pedidos</string>
 
-    >>>>>>> login
 </resources>
