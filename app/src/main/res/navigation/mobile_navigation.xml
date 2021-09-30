@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -22,5 +23,11 @@
         android:name="org.jbtc.gshop.ui.productos.ProductosFragment"
         android:label="@string/menu_productos"
         tools:layout="@layout/fragment_productos" />
+
+    <fragment
+        android:id="@+id/nav_pedidos"
+        android:name="org.jbtc.gshop.ui.pedidos.PedidosFragment"
+        android:label="@string/menu_pedidos"
+        tools:layout="@layout/fragment_pedidos" />
 
 </navigation>
