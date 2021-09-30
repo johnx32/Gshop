@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gshop">
         <activity
+            android:name=".ui.pedidos.Pedidos"
+            android:exported="true" />
+        <activity
+            android:name=".ui.login.productos"
+            android:exported="true"
+            android:label="@string/title_activity_productos" />
+        <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true" />
         <activity
