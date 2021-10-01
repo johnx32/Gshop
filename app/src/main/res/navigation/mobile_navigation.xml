@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_categories"
-        android:name="org.jbtc.gshop.ui.categories.CategoriesFragment"
+        android:name="org.jbtc.gshop.ui.categorias.CategoriasFragment"
         android:label="Categorias"
         tools:layout="@layout/fragment_categories"/>
 
@@ -28,6 +28,4 @@
         android:name="org.jbtc.gshop.ui.pedidos.PedidosFragment"
         android:label="Pedidos"
         tools:layout="@layout/fragment_productos"/>
-
-
 </navigation>

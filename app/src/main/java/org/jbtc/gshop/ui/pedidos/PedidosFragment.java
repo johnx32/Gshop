@@ -1,12 +1,13 @@
 package org.jbtc.gshop.ui.pedidos;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+
+import androidx.fragment.app.Fragment;
+
 
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentPedidosBinding;
@@ -23,3 +24,5 @@ public class PedidosFragment extends Fragment {
 //        return inflater.inflate(R.layout.fragment_pedidos, container, false);
     }
 }
+
+

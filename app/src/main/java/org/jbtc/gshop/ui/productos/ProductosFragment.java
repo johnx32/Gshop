@@ -2,6 +2,7 @@ package org.jbtc.gshop.ui.productos;
 
 import android.os.Bundle;
 
+
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -22,3 +23,4 @@ public class ProductosFragment extends Fragment {
         return binding.getRoot();
     }
 }
+

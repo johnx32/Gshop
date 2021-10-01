@@ -1,4 +1,4 @@
-package org.jbtc.gshop.ui.categories;
+package org.jbtc.gshop.ui.categorias;
 
 import android.os.Bundle;
 
@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentCategoriesBinding;
 
-public class CategoriesFragment extends Fragment {
+public class CategoriasFragment extends Fragment {
     private FragmentCategoriesBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
