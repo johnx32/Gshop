@@ -13,5 +13,15 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_categorias" />
 
+        <item
+            android:id="@+id/nav_productos"
+            android:icon="@drawable/ic_producto"
+            android:title="@string/menu_productos" />
+
+        <item
+            android:id="@+id/nav_pedidos"
+            android:icon="@drawable/ic_pedidos"
+            android:title="@string/menu_pedidos" />
+
     </group>
 </menu>

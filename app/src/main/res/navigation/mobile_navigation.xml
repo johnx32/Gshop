@@ -17,5 +17,15 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_categorias" />
 
+    <fragment
+        android:id="@+id/nav_productos"
+        android:name="org.jbtc.gshop.ui.producto.ProductoFragment"
+        android:label="@string/menu_productos"
+        tools:layout="@layout/fragment_productos" />
 
+    <fragment
+        android:id="@+id/nav_pedidos"
+        android:name="org.jbtc.gshop.ui.pedidos.PedidosFragment"
+        android:label="@string/menu_pedidos"
+        tools:layout="@layout/fragment_pedidos" />
 </navigation>
