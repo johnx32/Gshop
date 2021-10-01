@@ -11,5 +11,5 @@ public class Categorias {
 
     public String getNombre() { return nombre; }
 
-    public void setId(long id) { this.id = id; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 }
