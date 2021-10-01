@@ -13,7 +13,7 @@
             android:name=".ui.login.loginActivityAnibal"
             android:exported="true" />
         <activity
-            android:name=".ui.login.LoginAnibal"
+            android:name=".ui.login.loginAnibal"
             android:exported="true"
             android:label="@string/title_activity_login_anibal" />
         <activity
