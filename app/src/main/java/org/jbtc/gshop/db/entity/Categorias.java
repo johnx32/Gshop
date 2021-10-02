@@ -1,12 +1,12 @@
-package org.jbtc.gshop.ui.db.entity;
+package org.jbtc.gshop.db.entity;
 
 public class Categorias {
-    long id;
+    int id;
     String nombre;
 
-    public Categorias(long id, String nombre){
-        this.id=id;
-        this.nombre=nombre;
+    public Categorias(int id, String nombre){
+        this.id = id;
+        this.nombre = nombre;
     }
 
     public String getNombre() { return nombre; }
