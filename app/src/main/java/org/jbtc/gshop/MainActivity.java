@@ -20,9 +20,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import org.jbtc.gshop.databinding.ActivityMainBinding;
-import org.jbtc.gshop.ui.db.entity.Producto;
+import org.jbtc.gshop.db.GshopRoom;
+import org.jbtc.gshop.db.entity.Producto;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         createDrawerLayout();
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        /*mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("categorias").child("poleras").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -60,7 +64,14 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
                 }
             }
-        });
+        });*/
+        GshopRoom db = Room.databaseBuilder(getApplicationContext(),
+                GshopRoom.class, "database-name")
+                .allowMainThreadQueries()
+                .build();
+        db.productoDao().insertProducto(new Producto("des","polera",50,"url"));
+        List<Producto> productoList = db.productoDao().getAllProducto();
+        Log.i("TAG", "onCreate: "+productoList.get(0).getNombre());
 
     }
 

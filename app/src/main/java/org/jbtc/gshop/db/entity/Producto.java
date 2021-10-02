@@ -1,14 +1,19 @@
-package org.jbtc.gshop.ui.db.entity;
+package org.jbtc.gshop.db.entity;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Producto {
-    long id;
-    String descripcion;
-    String nombre;
-    int precio;
-    String url;
+    @PrimaryKey(autoGenerate = true)
+    public long id;
+    public String descripcion;
+    public String nombre;
+    public int precio;
+    public String url;
 
-    public Producto(long id, String descripcion, String nombre, int precio, String url) {
-        this.id = id;
+    public Producto( String descripcion, String nombre, int precio, String url) {
+
         this.descripcion = descripcion;
         this.nombre = nombre;
         this.precio = precio;
