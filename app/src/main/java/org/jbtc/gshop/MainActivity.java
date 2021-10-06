@@ -1,9 +1,11 @@
 package org.jbtc.gshop;
 
+import android.app.Person;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -14,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -25,11 +28,15 @@ import androidx.room.Room;
 import org.jbtc.gshop.databinding.ActivityMainBinding;
 import org.jbtc.gshop.db.GshopRoom;
 import org.jbtc.gshop.db.entity.Producto;
+import org.jbtc.gshop.db.viewmodel.ProductoViewModel;
 
 import java.util.List;
 
+import io.reactivex.functions.BiConsumer;
+
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "fkams";
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private DatabaseReference mDatabase;
@@ -45,8 +52,9 @@ public class MainActivity extends AppCompatActivity {
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                        .setAction("Action", null).show();*/
             }
         });
 
@@ -65,16 +73,44 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });*/
-        GshopRoom db = Room.databaseBuilder(getApplicationContext(),
-                GshopRoom.class, "database-name")
-                .allowMainThreadQueries()
-                .build();
-        db.productoDao().insertProducto(new Producto("des","polera",50,"url"));
-        List<Producto> productoList = db.productoDao().getAllProducto();
-        Log.i("TAG", "onCreate: "+productoList.get(0).getNombre());
+
+
+
+        /*Thread hilo = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                db.productoDao().insertProducto(new Producto("des","polera",50,"url"));
+
+                List<Producto> productoList = db.productoDao().getAllProducto();
+                Log.i("TAG", "onCreate: "+productoList.get(0).getNombre());
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.textviewprueba.setText( productoList.get(0).getNombre() );
+                    }
+                });
+
+
+            }
+        });
+        hilo.start();*/
+
+        ProductoViewModel productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
+        productoViewModel.getAllProducto()
+                .subscribe(new BiConsumer<List<Producto>, Throwable>() {
+                    @Override
+                    public void accept(List<Producto> productos, Throwable throwable) throws Exception {
+                        if(throwable==null)
+                            binding.textviewprueba.setText(productos.get(0).nombre);
+                    }
+                });
 
     }
 
+    /**
+     * Metodo donde se inicializa el Drawer
+     * */
     private void createDrawerLayout(){
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
@@ -91,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
