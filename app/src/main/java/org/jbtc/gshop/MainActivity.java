@@ -27,7 +27,9 @@ import androidx.room.Room;
 
 import org.jbtc.gshop.databinding.ActivityMainBinding;
 import org.jbtc.gshop.db.GshopRoom;
+import org.jbtc.gshop.db.entity.Categoria;
 import org.jbtc.gshop.db.entity.Producto;
+import org.jbtc.gshop.db.viewmodel.CategoriaViewModel;
 import org.jbtc.gshop.db.viewmodel.ProductoViewModel;
 
 import java.util.List;
@@ -103,6 +105,16 @@ public class MainActivity extends AppCompatActivity {
                     public void accept(List<Producto> productos, Throwable throwable) throws Exception {
                         if(throwable==null)
                             binding.textviewprueba.setText(productos.get(0).nombre);
+                    }
+                });
+
+        CategoriaViewModel categoriaViewModel = new ViewModelProvider(this).get(CategoriaViewModel.class);
+        categoriaViewModel.getAllCategoria()
+                .subscribe(new BiConsumer<List<Categoria>, Throwable>() {
+                    @Override
+                    public void accept(List<Categoria> categorias, Throwable throwable) throws Exception {
+                        if(throwable==null)
+                            binding.textviewprueba.setText(categorias.get(0).nombre);
                     }
                 });
 
