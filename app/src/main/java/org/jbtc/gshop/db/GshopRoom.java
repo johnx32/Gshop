@@ -6,10 +6,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import org.jbtc.gshop.db.dao.CategoriasDao;
 import org.jbtc.gshop.db.dao.ProductoDao;
+import org.jbtc.gshop.db.entity.Categorias;
 import org.jbtc.gshop.db.entity.Producto;
 
-@Database(entities = {Producto.class}, version = 1)
+@Database(entities = {Producto.class, Categorias.class}, version = 1)
 public abstract class GshopRoom extends RoomDatabase {
 
     //public static volatile GshopRoom INSTANCE;
@@ -31,4 +33,6 @@ public abstract class GshopRoom extends RoomDatabase {
     }
 
     public abstract ProductoDao productoDao();
+
+    public abstract CategoriasDao categoriasDao();
 }
