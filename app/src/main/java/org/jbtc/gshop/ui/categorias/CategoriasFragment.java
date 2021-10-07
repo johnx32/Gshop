@@ -9,9 +9,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+//<<<<<<< HEAD
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+//=======
+import androidx.navigation.fragment.NavHostFragment;
+//>>>>>>> devJorgeEditCategoria
 
+import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentCategoriasBinding;
 import org.jbtc.gshop.db.adapter.CategoriasAdapter;
 import org.jbtc.gshop.db.entity.Categoria;
@@ -30,6 +35,7 @@ public class CategoriasFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,@Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
         binding = FragmentCategoriasBinding.inflate(inflater,container,false);
+        //<<<<<<< HEAD
         categoriaViewModel = new ViewModelProvider(this).get(CategoriaViewModel.class);
 
         initApater();
@@ -43,6 +49,11 @@ public class CategoriasFragment extends Fragment {
                         else Log.e("TAG", "accept: Error: ", throwable);
                     }
                 });
+        //=======
+
+        NavHostFragment.findNavController(this)
+                .navigate(R.id.action_nav_categorias_to_categoriaEditFragment);
+        //>>>>>>> devJorgeEditCategoria
 
         return binding.getRoot();
     }
