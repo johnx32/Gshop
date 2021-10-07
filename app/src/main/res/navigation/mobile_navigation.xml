@@ -15,7 +15,11 @@
         android:id="@+id/nav_categorias"
         android:name="org.jbtc.gshop.ui.categorias.CategoriasFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_categorias" />
+        tools:layout="@layout/fragment_categorias" >
+        <action
+            android:id="@+id/action_nav_categorias_to_categoriaEditFragment"
+            app:destination="@id/categoriaEditFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_productos"
@@ -35,6 +39,10 @@
         android:id="@+id/productoEditFragment"
         android:name="org.jbtc.gshop.ui.productos.producto.ProductoEditFragment"
         android:label="ProductoEditFragment" />
+    <fragment
+        android:id="@+id/categoriaEditFragment"
+        android:name="org.jbtc.gshop.ui.categorias.categoria.CategoriaEditFragment"
+        android:label="CategoriaEditFragment" />
 
 
 </navigation>
