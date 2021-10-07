@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new BiConsumer<List<Producto>, Throwable>() {
                     @Override
                     public void accept(List<Producto> productos, Throwable throwable) throws Exception {
-                        if(throwable==null)
-                            binding.textviewprueba.setText(productos.get(0).nombre);
+                        //if(throwable==null)
+                            //binding.textviewprueba.setText(productos.get(0).nombre);
                     }
                 });
 
