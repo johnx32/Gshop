@@ -11,5 +11,11 @@
     <string name="menu_categorias">Categorias</string>
     <string name="menu_productos">Productos</string>
     <string name="menu_pedidos">Pedidos</string>
+    <string name="key">Key</string>
+    <string name="txtkey">Key</string>
+    <string name="txtnombre">Nombre</string>
+    <string name="nombre">Nombre</string>
+    <string name="txte_mail">E-mail</string>
+    <string name="e_mail">E-mail</string>
 
 </resources>
