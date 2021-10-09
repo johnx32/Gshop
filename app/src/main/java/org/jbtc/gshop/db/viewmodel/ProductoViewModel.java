@@ -29,4 +29,10 @@ public class ProductoViewModel extends AndroidViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+    public Single<Long[]> insertProductos(List<Producto> productoList){
+        return productoDao.insertProductos(productoList)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+    }
 }

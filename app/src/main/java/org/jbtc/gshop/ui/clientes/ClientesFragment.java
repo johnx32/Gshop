@@ -5,9 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -16,12 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentClientesBinding;
-import org.jbtc.gshop.db.adapter.ClienteAdapter;
-import org.jbtc.gshop.db.adapter.ProductosAdapter;
+import org.jbtc.gshop.adapter.ClienteAdapter;
 import org.jbtc.gshop.db.entity.Cliente;
-import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.ClienteViewModel;
 
 import java.util.List;

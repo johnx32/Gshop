@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -30,6 +31,7 @@ import org.jbtc.gshop.db.GshopRoom;
 import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.ProductoViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.functions.BiConsumer;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "fkams";
     private AppBarConfiguration mAppBarConfiguration;
+    private ProductoViewModel productoViewModel;
     private ActivityMainBinding binding;
     private DatabaseReference mDatabase;
 
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
+
         setSupportActionBar(binding.appBarMain.toolbar);
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,46 +62,10 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();*/
             }
         });
-
+        //todo: aqui falta hacer x cosa
         createDrawerLayout();
 
-
-        /*mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("categorias").child("poleras").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                }
-                else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                }
-            }
-        });*/
-
-
-
-        /*Thread hilo = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                db.productoDao().insertProducto(new Producto("des","polera",50,"url"));
-
-                List<Producto> productoList = db.productoDao().getAllProducto();
-                Log.i("TAG", "onCreate: "+productoList.get(0).getNombre());
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        binding.textviewprueba.setText( productoList.get(0).getNombre() );
-                    }
-                });
-
-
-            }
-        });
-        hilo.start();*/
-
-        ProductoViewModel productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
+        /*ProductoViewModel productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
         productoViewModel.getAllProducto()
                 .subscribe(new BiConsumer<List<Producto>, Throwable>() {
                     @Override
@@ -104,7 +73,35 @@ public class MainActivity extends AppCompatActivity {
                         //if(throwable==null)
                             //binding.textviewprueba.setText(productos.get(0).nombre);
                     }
-                });
+                });*/
+        getFromFirebaseDatabase();
+    }
+
+    private void getFromFirebaseDatabase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference refPoleras = database.getReference("categorias").child("poleras");
+        refPoleras.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    Log.i(TAG, "onComplete: task: "+task.getResult());
+                    List<Producto> productoList = new ArrayList<>();
+                    DataSnapshot dsPoleras = task.getResult();
+                    for (DataSnapshot dsProducto:dsPoleras.getChildren()){
+                        String key = dsProducto.getKey();
+                        Producto producto = dsProducto.getValue(Producto.class);
+                        producto.key = key;
+                        productoList.add(producto);
+                    }
+                    productoViewModel.insertProductos(productoList);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "onFailure: error en peticion a firebase", e);
+            }
+        });
 
     }
 

@@ -1,4 +1,4 @@
-package org.jbtc.gshop.db.adapter;
+package org.jbtc.gshop.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

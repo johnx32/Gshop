@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentProductosBinding;
-import org.jbtc.gshop.db.adapter.ProductosAdapter;
+import org.jbtc.gshop.adapter.ProductosAdapter;
 import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.ProductoViewModel;
 
@@ -46,8 +46,8 @@ public class ProductosFragment extends Fragment {
                     }
                 });
 
-        NavHostFragment.findNavController(this)
-                .navigate(R.id.action_nav_productos_to_productoEditFragment);
+        //NavHostFragment.findNavController(this)
+                //.navigate(R.id.action_nav_productos_to_productoEditFragment);
 
         return binding.getRoot();
     }

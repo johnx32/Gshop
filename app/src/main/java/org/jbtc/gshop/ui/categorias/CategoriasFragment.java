@@ -18,7 +18,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentCategoriasBinding;
-import org.jbtc.gshop.db.adapter.CategoriasAdapter;
+import org.jbtc.gshop.adapter.CategoriasAdapter;
 import org.jbtc.gshop.db.entity.Categoria;
 import org.jbtc.gshop.db.viewmodel.CategoriaViewModel;
 

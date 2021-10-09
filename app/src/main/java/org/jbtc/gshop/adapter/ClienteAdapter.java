@@ -1,4 +1,4 @@
-package org.jbtc.gshop.db.adapter;
+package org.jbtc.gshop.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.db.entity.Cliente;
-import org.jbtc.gshop.db.entity.Producto;
 
 import java.util.ArrayList;
 import java.util.List;

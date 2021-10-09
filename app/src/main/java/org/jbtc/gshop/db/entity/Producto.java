@@ -1,18 +1,27 @@
 package org.jbtc.gshop.db.entity;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import com.google.firebase.database.Exclude;
 
 @Entity
 public class Producto {
     @PrimaryKey(autoGenerate = true)
+    @Exclude
     public long id;
+    @Exclude
+    public String key;
     public String descripcion;
     public String nombre;
     public int precio;
     public String url;
 
-    public Producto( String descripcion, String nombre, int precio, String url) {
+    public Producto() {
+    }
+
+    public Producto(String descripcion, String nombre, int precio, String url) {
 
         this.descripcion = descripcion;
         this.nombre = nombre;

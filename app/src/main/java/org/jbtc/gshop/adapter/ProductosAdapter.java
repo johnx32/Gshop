@@ -1,4 +1,4 @@
-package org.jbtc.gshop.db.adapter;
+package org.jbtc.gshop.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.db.entity.Producto;
@@ -35,6 +37,9 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
     @Override
     public void onBindViewHolder(ProductosViewHolder holder, int position) {
         holder.name.setText( items.get(position).nombre );
+        Picasso.get()
+                .load(items.get(position).url)
+                .into(holder.img);
     }
 
 
