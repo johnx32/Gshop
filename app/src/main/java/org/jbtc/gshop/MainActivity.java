@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Log.i(TAG, "onComplete: task: "+task.getResult());
                     List<Producto> productoList = new ArrayList<>();
+
                     DataSnapshot dsPoleras = task.getResult();
                     for (DataSnapshot dsProducto:dsPoleras.getChildren()){
                         String key = dsProducto.getKey();
@@ -93,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
                         producto.key = key;
                         productoList.add(producto);
                     }
-                    productoViewModel.insertProductos(productoList);
+                    productoViewModel.insertProductos(productoList)
+                            .subscribe();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {

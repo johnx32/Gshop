@@ -56,7 +56,15 @@ public class ProductosFragment extends Fragment {
         binding.rvProdList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.rvProdList.setLayoutManager(linearLayoutManager);
-        adapter = new ProductosAdapter();
+        adapter = new ProductosAdapter(new ProductosAdapter.OnClick() {
+            @Override
+            public void onClickCard(Producto producto) {
+                Bundle b = new Bundle();
+                b.putLong("id",producto.id);
+                NavHostFragment.findNavController(ProductosFragment.this)
+                    .navigate(R.id.action_nav_productos_to_productoEditFragment,b);
+            }
+        });
         binding.rvProdList.setAdapter(adapter);
     }
 

@@ -21,6 +21,10 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
     private List<Producto> items = new ArrayList<>();
 
 
+    public ProductosAdapter(OnClick onClick) {
+        this.onClick = onClick;
+    }
+
     public void setItems(List<Producto> items) {
         this.items = items;
         notifyDataSetChanged();
@@ -55,6 +59,16 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
             super(itemView);
             img=itemView.findViewById(R.id.iv_cv_prod_img);
             name=itemView.findViewById(R.id.tv_cv_prod_name);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClick.onClickCard(items.get(getAdapterPosition()));
+                }
+            });
         }
+    }
+    private OnClick onClick;
+    public interface OnClick{
+        void onClickCard(Producto producto);
     }
 }
