@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/categoriasFragment"
+        android:name="org.jbtc.gshop.ui.categorias.CategoriasFragment"
+        android:label="CategoriasFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="org.jbtc.gshop.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_categoriasFragment"
+            app:destination="@id/categoriasFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productosFragment"
+            app:destination="@id/productosFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_pedidosFragment"
+            app:destination="@id/pedidosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productosFragment"
+        android:name="org.jbtc.gshop.ui.productos.ProductosFragment"
+        android:label="ProductosFragment" />
+    <fragment
+        android:id="@+id/pedidosFragment"
+        android:name="org.jbtc.gshop.ui.pedidos.PedidosFragment"
+        android:label="PedidosFragment" />
+</navigation>
