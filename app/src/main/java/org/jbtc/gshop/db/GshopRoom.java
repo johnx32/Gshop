@@ -5,7 +5,9 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
+import org.jbtc.gshop.db.converter.DateLongConverter;
 import org.jbtc.gshop.db.dao.CategoriaDao;
 import org.jbtc.gshop.db.dao.ProductoDao;
 import org.jbtc.gshop.db.entity.Categoria;
@@ -14,6 +16,7 @@ import org.jbtc.gshop.db.dao.ClienteDao;
 import org.jbtc.gshop.db.entity.Cliente;
 
 @Database(entities = {Producto.class, Categoria.class, Cliente.class}, version = 1)
+@TypeConverters({DateLongConverter.class})
 public abstract class GshopRoom extends RoomDatabase {
 
     //public static volatile GshopRoom INSTANCE;
