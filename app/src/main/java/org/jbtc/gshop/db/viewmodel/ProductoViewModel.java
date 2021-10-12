@@ -24,6 +24,13 @@ public class ProductoViewModel extends AndroidViewModel {
         productoDao = GshopRoom.getInstance(application).productoDao();
     }
 
+    public Single<Producto> getProducto(long id){
+        return productoDao.getProducto(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+
     public Single<List<Producto>> getAllProducto(){
         return productoDao.getAllProducto()
                 .subscribeOn(Schedulers.io())

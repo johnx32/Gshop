@@ -1,5 +1,6 @@
 package org.jbtc.gshop.db.dao;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import io.reactivex.Single;
 
+@Dao
 public interface PedidoDao {
     @Query("SELECT * FROM Pedido")
     Single<List<Pedido>> getAllPedido();

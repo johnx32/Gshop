@@ -18,6 +18,9 @@ public interface ProductoDao {
     @Query("SELECT * FROM Producto")
     Single<List<Producto>> getAllProducto();
 
+    @Query("select * from producto where id=:id")
+    Single<Producto> getProducto(long id);
+
     //CREATE
     //@Insert
     //Single<Long> insertProducto(Producto producto);
