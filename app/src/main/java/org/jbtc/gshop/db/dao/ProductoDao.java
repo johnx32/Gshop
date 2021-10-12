@@ -43,4 +43,7 @@ public interface ProductoDao {
 
     @Query("delete from Producto")
     Single<Integer> clearProducto();
+
+    @Insert
+    Single<Integer> insertProducto(Producto producto);
 }

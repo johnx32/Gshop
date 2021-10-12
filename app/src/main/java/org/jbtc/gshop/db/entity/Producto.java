@@ -17,6 +17,8 @@ public class Producto {
     public String nombre;
     public int precio;
     public String url;
+    @Exclude
+    public String name_categoria;
 
     public Producto() {
     }

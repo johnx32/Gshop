@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentProductoEditBinding;
@@ -39,7 +41,26 @@ public class ProductoEditFragment extends Fragment {
         binding =  FragmentProductoEditBinding.inflate(inflater,container,false);
         productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
         getBundle();
+        initLiveData();
         return binding.getRoot();
+    }
+
+    private void getProductoFromLayout(){
+        Producto p=new Producto();
+
+        productoViewModel.updateProductoForResult(p);
+    }
+
+    private void initLiveData() {
+        productoViewModel.updateProductoResult()
+                .observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        //todo: mostrar mensaje dialo
+                        NavHostFragment.findNavController(ProductoEditFragment.this)
+                                .popBackStack();
+                    }
+                });
     }
 
     private void getBundle() {
@@ -60,7 +81,7 @@ public class ProductoEditFragment extends Fragment {
     }
 
     private void setProductoToLayout(Producto p) {
-        
+
     }
 
 
