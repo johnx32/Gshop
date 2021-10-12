@@ -23,6 +23,7 @@ public class Producto {
     public Producto() {
     }
 
+    @Ignore
     public Producto(String descripcion, String nombre, int precio, String url) {
 
         this.descripcion = descripcion;

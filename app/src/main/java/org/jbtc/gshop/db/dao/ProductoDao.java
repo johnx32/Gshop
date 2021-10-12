@@ -45,5 +45,5 @@ public interface ProductoDao {
     Single<Integer> clearProducto();
 
     @Insert
-    Single<Integer> insertProducto(Producto producto);
+    Single<Long> insertProducto(Producto producto);
 }

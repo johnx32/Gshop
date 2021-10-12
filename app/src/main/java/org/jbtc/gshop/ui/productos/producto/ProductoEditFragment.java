@@ -45,10 +45,11 @@ public class ProductoEditFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void getProductoFromLayout(){
+    private Producto getProductoFromLayout(){
         Producto p=new Producto();
-
-        productoViewModel.updateProductoForResult(p);
+        p.id=producto.id;
+        //todo:p.descripcion = binding.
+        return p;
     }
 
     private void initLiveData() {
@@ -56,9 +57,13 @@ public class ProductoEditFragment extends Fragment {
                 .observe(getViewLifecycleOwner(), new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {
-                        //todo: mostrar mensaje dialo
-                        NavHostFragment.findNavController(ProductoEditFragment.this)
-                                .popBackStack();
+                        if(integer>0)
+                            //todo: mostrar mensaje dialo
+                            NavHostFragment.findNavController(ProductoEditFragment.this)
+                                    .popBackStack();
+                            //else
+                                //todo: mensaje de error
+
                     }
                 });
     }
@@ -99,6 +104,8 @@ public class ProductoEditFragment extends Fragment {
                 
                 break;
             case R.id.action_checkout:
+                producto = getProductoFromLayout();
+                productoViewModel.updateProductoForResult(producto);
                 break;
         }
         return super.onOptionsItemSelected(item);
