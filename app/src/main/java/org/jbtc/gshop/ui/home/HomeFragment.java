@@ -40,6 +40,13 @@ public class HomeFragment extends Fragment {
                 NavHostFragment.findNavController(this)
                 .navigate(R.id.action_nav_home_to_nav_productos) );
 
+        binding.cvHomePedidos.setOnClickListener(v ->
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.action_nav_home_to_nav_pedidos) );
+
+        binding.cvHomeCategories.setOnClickListener(v ->
+                NavHostFragment.findNavController(this)
+                        .navigate(R.id.action_nav_home_to_nav_categorias) );
 
     }
 

@@ -54,14 +54,7 @@ public class MainActivity extends AppCompatActivity {
         productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-            }
-        });
+
         //todo: aqui falta hacer x cosa
         createDrawerLayout();
 
