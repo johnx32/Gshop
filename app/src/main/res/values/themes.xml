@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Gshop" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/colorprimario</item>
+        <item name="colorPrimaryVariant">@color/colorprimariodark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,6 +12,21 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:textViewStyle">@style/TextxDefecto</item>
+        <item name="android:editTextStyle">@style/EdittextDefault</item>
+
+    </style>
+
+    <style name="TextxDefecto" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="EdittextDefault" parent="android:Widget.EditText">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:state_multiline">false</item>
     </style>
 
     <style name="Theme.Gshop.NoActionBar">
