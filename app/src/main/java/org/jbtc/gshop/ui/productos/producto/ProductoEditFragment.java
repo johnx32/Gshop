@@ -19,14 +19,14 @@ import androidx.navigation.fragment.NavHostFragment;
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentProductoEditBinding;
 import org.jbtc.gshop.db.entity.Producto;
-import org.jbtc.gshop.db.viewmodel.ProductoViewModel;
+import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
 
 import io.reactivex.functions.BiConsumer;
 
 public class ProductoEditFragment extends Fragment {
     private static final String TAG = "crmsl";
     private FragmentProductoEditBinding binding;
-    private ProductoViewModel productoViewModel;
+    private ProductosViewModel productosViewModel;
     private Producto producto;
 
     @Override
@@ -39,7 +39,7 @@ public class ProductoEditFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding =  FragmentProductoEditBinding.inflate(inflater,container,false);
-        productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
+        productosViewModel = new ViewModelProvider(this).get(ProductosViewModel.class);
         getBundle();
         initLiveData();
         return binding.getRoot();
@@ -53,7 +53,7 @@ public class ProductoEditFragment extends Fragment {
     }
 
     private void initLiveData() {
-        productoViewModel.updateProductoResult()
+        productosViewModel.updateProductoResult()
                 .observe(getViewLifecycleOwner(), new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {
@@ -72,7 +72,7 @@ public class ProductoEditFragment extends Fragment {
         Bundle b = getArguments();
         if(b!=null){
             long id = b.getLong("id");
-            productoViewModel.getProducto(id)
+            productosViewModel.getProducto(id)
                     .subscribe(new BiConsumer<Producto, Throwable>() {
                         @Override
                         public void accept(Producto p, Throwable throwable) throws Exception {
@@ -105,7 +105,7 @@ public class ProductoEditFragment extends Fragment {
                 break;
             case R.id.action_checkout:
                 producto = getProductoFromLayout();
-                productoViewModel.updateProductoForResult(producto);
+                productosViewModel.updateProductoForResult(producto);
                 break;
         }
         return super.onOptionsItemSelected(item);

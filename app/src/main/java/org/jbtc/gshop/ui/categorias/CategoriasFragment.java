@@ -17,13 +17,10 @@ import androidx.navigation.fragment.NavHostFragment;
 //>>>>>>> devJorgeEditCategoria
 
 import org.jbtc.gshop.R;
-import org.jbtc.gshop.adapter.ProductosAdapter;
 import org.jbtc.gshop.databinding.FragmentCategoriasBinding;
 import org.jbtc.gshop.adapter.CategoriasAdapter;
 import org.jbtc.gshop.db.entity.Categoria;
-import org.jbtc.gshop.db.entity.Producto;
-import org.jbtc.gshop.db.viewmodel.CategoriaViewModel;
-import org.jbtc.gshop.ui.productos.ProductosFragment;
+import org.jbtc.gshop.db.viewmodel.CategoriasViewModel;
 
 import java.util.List;
 
@@ -32,18 +29,18 @@ import io.reactivex.functions.BiConsumer;
 public class CategoriasFragment extends Fragment {
     private FragmentCategoriasBinding binding;
     private CategoriasAdapter adapter;
-    private CategoriaViewModel categoriaViewModel;
+    private CategoriasViewModel categoriasViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,@Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
         binding = FragmentCategoriasBinding.inflate(inflater,container,false);
         //<<<<<<< HEAD
-        categoriaViewModel = new ViewModelProvider(this).get(CategoriaViewModel.class);
+        categoriasViewModel = new ViewModelProvider(this).get(CategoriasViewModel.class);
 
         initApater();
 
-        categoriaViewModel.getAllCategoria()
+        categoriasViewModel.getAllCategoria()
                 .subscribe(new BiConsumer<List<Categoria>, Throwable>() {
                     @Override
                     public void accept(List<Categoria> categorias, Throwable throwable) throws Exception {

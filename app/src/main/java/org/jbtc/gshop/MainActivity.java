@@ -1,16 +1,12 @@
 package org.jbtc.gshop;
 
-import android.app.Person;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -24,23 +20,22 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import org.jbtc.gshop.databinding.ActivityMainBinding;
-import org.jbtc.gshop.db.GshopRoom;
+import org.jbtc.gshop.db.entity.Categoria;
 import org.jbtc.gshop.db.entity.Producto;
-import org.jbtc.gshop.db.viewmodel.ProductoViewModel;
+import org.jbtc.gshop.db.viewmodel.CategoriasViewModel;
+import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.functions.BiConsumer;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "fkams";
     private AppBarConfiguration mAppBarConfiguration;
-    private ProductoViewModel productoViewModel;
+    private ProductosViewModel productosViewModel;
+    private CategoriasViewModel categoriasViewModel;
     private ActivityMainBinding binding;
     private DatabaseReference mDatabase;
 
@@ -51,23 +46,58 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
+        productosViewModel = new ViewModelProvider(this).get(ProductosViewModel.class);
+        categoriasViewModel = new ViewModelProvider(this).get(CategoriasViewModel.class);
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
         //todo: aqui falta hacer x cosa
         createDrawerLayout();
 
-        /*ProductoViewModel productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
-        productoViewModel.getAllProducto()
-                .subscribe(new BiConsumer<List<Producto>, Throwable>() {
+        //getFromFirebaseDatabase();
+        loadCategoriasFromFirebase();
+    }
+
+
+    private void loadCategoriasFromFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("categorias");
+
+        myRef.get()
+                .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
-                    public void accept(List<Producto> productos, Throwable throwable) throws Exception {
-                        //if(throwable==null)
-                            //binding.textviewprueba.setText(productos.get(0).nombre);
+                    public void onComplete(Task<DataSnapshot> task) {
+
+                        if(task.isSuccessful()){
+                            List<Categoria> categoriaList = new ArrayList<>();
+                            List<Producto> productoList = new ArrayList<>();
+
+                            DataSnapshot categorias = task.getResult();
+                            for(DataSnapshot categoriaData : categorias.getChildren()){
+                                Categoria categoria = new Categoria(categoriaData.getKey());
+                                categoriaList.add(categoria);
+
+                                for (DataSnapshot productoData : categoriaData.getChildren()){
+                                    Producto p = productoData.getValue(Producto.class);
+                                    p.key=productoData.getKey();
+                                    p.name_categoria=categoria.nombre;
+                                    productoList.add(p);
+                                }
+                            }
+
+                            productosViewModel.clearProducto()
+                                    .flatMap(integer -> categoriasViewModel.clearCategoria())
+                                    .flatMap(integer -> categoriasViewModel.resetCounter())
+                                    .flatMap(aBoolean -> productosViewModel.resetCounter())
+                                    .flatMap(aBoolean -> productosViewModel.insertProductos(productoList))
+                                    .flatMap(longs -> categoriasViewModel.insertCategorias(categoriaList))
+                                    .subscribe();
+                        }else{ /*si no hay internet no eliminara nada*/ }
                     }
-                });*/
-        getFromFirebaseDatabase();
+                })
+                .addOnFailureListener(e -> Log.e(TAG, "loadCategoriasFromFirebase no hay internet: ", e));
+
+
     }
 
     private void getFromFirebaseDatabase() {
@@ -87,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                         producto.key = key;
                         productoList.add(producto);
                     }
-                    productoViewModel.insertProductos(productoList)
+                    productosViewModel.insertProductos(productoList)
                             .subscribe();
                 }
             }
@@ -121,6 +151,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void setTitle(CharSequence title) {
+        binding.appBarMain.toolbar.setTitle(title);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

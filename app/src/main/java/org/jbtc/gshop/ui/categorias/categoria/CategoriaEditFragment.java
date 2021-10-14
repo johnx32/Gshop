@@ -18,6 +18,7 @@ public class CategoriaEditFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding =  FragmentCategoriaEditBinding.inflate(inflater,container,false);
+        getActivity().setTitle("Editar Categoria");
         return binding.getRoot();
     }
 }

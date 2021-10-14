@@ -17,7 +17,7 @@ import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentProductosBinding;
 import org.jbtc.gshop.adapter.ProductosAdapter;
 import org.jbtc.gshop.db.entity.Producto;
-import org.jbtc.gshop.db.viewmodel.ProductoViewModel;
+import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
 
 import java.util.List;
 
@@ -26,17 +26,17 @@ import io.reactivex.functions.BiConsumer;
 public class ProductosFragment extends Fragment {
     private FragmentProductosBinding binding;
     private ProductosAdapter adapter;
-    private ProductoViewModel productoViewModel;
+    private ProductosViewModel productosViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentProductosBinding.inflate(inflater,container,false);
-        productoViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
+        productosViewModel = new ViewModelProvider(this).get(ProductosViewModel.class);
 
         initAdapter();
 
-        productoViewModel.getAllProducto()
+        productosViewModel.getAllProducto()
                 .subscribe(new BiConsumer<List<Producto>, Throwable>() {
                     @Override
                     public void accept(List<Producto> productos, Throwable throwable) throws Exception {
