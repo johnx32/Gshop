@@ -17,10 +17,13 @@ import androidx.navigation.fragment.NavHostFragment;
 //>>>>>>> devJorgeEditCategoria
 
 import org.jbtc.gshop.R;
+import org.jbtc.gshop.adapter.ProductosAdapter;
 import org.jbtc.gshop.databinding.FragmentCategoriasBinding;
 import org.jbtc.gshop.adapter.CategoriasAdapter;
 import org.jbtc.gshop.db.entity.Categoria;
+import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.CategoriaViewModel;
+import org.jbtc.gshop.ui.productos.ProductosFragment;
 
 import java.util.List;
 
@@ -51,9 +54,9 @@ public class CategoriasFragment extends Fragment {
                 });
         //=======
 
-        NavHostFragment.findNavController(this)
+        /*NavHostFragment.findNavController(this)
                 .navigate(R.id.action_nav_categorias_to_categoriaEditFragment);
-        //>>>>>>> devJorgeEditCategoria
+        //>>>>>>> devJorgeEditCategoria*/
 
         return binding.getRoot();
     }
@@ -62,7 +65,15 @@ public class CategoriasFragment extends Fragment {
         binding.rvCatList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         binding.rvCatList.setLayoutManager(linearLayoutManager);
-        adapter = new CategoriasAdapter();
+        adapter = new CategoriasAdapter(new CategoriasAdapter.OnClick() {
+            @Override
+            public void onClickCard(Categoria categoria) {
+                Bundle b = new Bundle();
+                b.putLong("id",categoria.id);
+                NavHostFragment.findNavController(CategoriasFragment.this)
+                        .navigate(R.id.action_nav_categorias_to_categoriaEditFragment,b);
+            }
+        });
         binding.rvCatList.setAdapter(adapter);
     }
 

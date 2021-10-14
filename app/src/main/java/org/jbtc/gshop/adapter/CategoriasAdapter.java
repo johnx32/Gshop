@@ -11,12 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.db.entity.Categoria;
+import org.jbtc.gshop.db.entity.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.CategoriasViewHolder> {
+
     private List<Categoria> items = new ArrayList<>();
+
+    public CategoriasAdapter(
+            CategoriasAdapter.OnClick onClick) {
+        this.onClick = onClick;
+    }
 
     public void setItems(List<Categoria> items) {
         this.items = items;
@@ -49,6 +56,17 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
             super(itemView);
             img = itemView.findViewById(R.id.iv_cv_cat_img);
             name = itemView.findViewById(R.id.tv_cv_cat_name);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClick.onClickCard(items.get(getAdapterPosition()));
+                }
+            });
         }
+    }
+
+    private CategoriasAdapter.OnClick onClick;
+    public interface OnClick{
+        void onClickCard(Categoria categoria);
     }
 }
