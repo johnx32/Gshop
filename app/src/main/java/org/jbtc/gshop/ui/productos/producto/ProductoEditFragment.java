@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -49,6 +50,9 @@ public class ProductoEditFragment extends Fragment {
         Producto p=new Producto();
         p.id=producto.id;
         //todo:p.descripcion = binding.
+        p.nombre = binding.etProdEditName.getText().toString();
+
+
         return p;
     }
 
@@ -57,12 +61,13 @@ public class ProductoEditFragment extends Fragment {
                 .observe(getViewLifecycleOwner(), new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {
-                        if(integer>0)
+                        if(integer>0) {
                             //todo: mostrar mensaje dialo
                             NavHostFragment.findNavController(ProductoEditFragment.this)
                                     .popBackStack();
                             //else
-                                //todo: mensaje de error
+                            //todo: mensaje de error
+                        }
 
                     }
                 });
@@ -86,7 +91,7 @@ public class ProductoEditFragment extends Fragment {
     }
 
     private void setProductoToLayout(Producto p) {
-
+        binding.etProdEditName.setText( p.nombre );
     }
 
 
@@ -104,8 +109,18 @@ public class ProductoEditFragment extends Fragment {
                 
                 break;
             case R.id.action_checkout:
-                producto = getProductoFromLayout();
-                productosViewModel.updateProductoForResult(producto);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Esta seguro que desea eliminar el producto")
+                        .setTitle("Eliminar")
+                        .setNegativeButton("NO",null)
+                        .setPositiveButton("SI",(dialog, which) -> {
+                            producto = getProductoFromLayout();
+                            productosViewModel.updateProductoForResult(producto);
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+
                 break;
         }
         return super.onOptionsItemSelected(item);
