@@ -4,11 +4,9 @@ import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +17,6 @@ import org.jbtc.gshop.db.dao.ProductoDao;
 import org.jbtc.gshop.db.entity.Producto;
 
 import java.util.List;
-import java.util.Optional;
 
 import io.reactivex.Single;
 import io.reactivex.SingleSource;
@@ -30,6 +27,7 @@ public class ProductosViewModel extends AndroidViewModel {
     private static final String TAG = "casbc";
     private ProductoDao productoDao;
     private MutableLiveData<Integer> intUpdate;
+    private MutableLiveData<Integer> intDelete;
 
     public ProductosViewModel(Application application) {
         super(application);
@@ -122,6 +120,30 @@ public class ProductosViewModel extends AndroidViewModel {
         if (intUpdate == null)
             intUpdate = new MutableLiveData<Integer>();
         return intUpdate;
+    }
+
+    // DELETE
+    public void deleteProductoForResult(Producto producto) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("categorias").child(producto.name_categoria).child(producto.key).removeValue()
+                .addOnSuccessListener(unused -> {
+                    productoDao.deleteProducto(producto)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe((integer, throwable) -> {
+                                if (throwable == null){
+                                    intDelete.setValue(1);
+                                }else{
+                                    intDelete.setValue(0);
+                                }
+                            });
+                }).addOnFailureListener(e -> intDelete.setValue(0));
+    }
+
+    public LiveData<Integer> deleteProductoResult() {
+        if (intDelete == null)
+            intDelete = new MutableLiveData<Integer>();
+        return intDelete;
     }
 
     public Single<Integer> clearProducto() {
