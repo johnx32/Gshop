@@ -17,6 +17,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.squareup.picasso.Picasso;
+
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentProductoEditBinding;
 import org.jbtc.gshop.db.entity.Producto;
@@ -51,6 +53,8 @@ public class ProductoEditFragment extends Fragment {
         p.id=producto.id;
         //todo:p.descripcion = binding.
         p.nombre = binding.etProdEditName.getText().toString();
+        p.descripcion = binding.etProdEditDescip.getText().toString();
+        p.precio = Integer.parseInt(binding.etProdEditName.getText().toString());
 
 
         return p;
@@ -91,7 +95,13 @@ public class ProductoEditFragment extends Fragment {
     }
 
     private void setProductoToLayout(Producto p) {
+
         binding.etProdEditName.setText( p.nombre );
+        binding.etProdEditDescip.setText(p.descripcion);
+        binding.etProdEditPrecio.setText(String.valueOf(p.precio));
+        Picasso.get()
+                .load(p.url)
+                .into(binding.imgProdEdit);
     }
 
 
