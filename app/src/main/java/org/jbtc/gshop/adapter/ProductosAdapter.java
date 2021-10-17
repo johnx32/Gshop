@@ -41,6 +41,8 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
     @Override
     public void onBindViewHolder(ProductosViewHolder holder, int position) {
         holder.name.setText( items.get(position).nombre );
+        holder.descripcion.setText(items.get(position).descripcion);
+        holder.precio.setText(String.valueOf(items.get(position).precio));
         Picasso.get()
                 .load(items.get(position).url)
                 .into(holder.img);
@@ -55,10 +57,14 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
     public class ProductosViewHolder extends RecyclerView.ViewHolder{
         ImageView img;
         TextView name;
+        TextView descripcion;
+        TextView precio;
         public ProductosViewHolder(@NonNull View itemView) {
             super(itemView);
             img=itemView.findViewById(R.id.iv_cv_prod_img);
             name=itemView.findViewById(R.id.tv_cv_prod_name);
+            descripcion=itemView.findViewById(R.id.tv_cv_prod_descripcion);
+            precio = itemView.findViewById(R.id.tv_cv_prod_precio);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
