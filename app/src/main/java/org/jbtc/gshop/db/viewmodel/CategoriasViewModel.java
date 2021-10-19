@@ -10,6 +10,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import org.jbtc.gshop.db.GshopRoom;
 import org.jbtc.gshop.db.dao.CategoriaDao;
 import org.jbtc.gshop.db.entity.Categoria;
+import org.jbtc.gshop.db.entity.Producto;
 
 import java.util.List;
 
@@ -24,6 +25,12 @@ public class CategoriasViewModel extends AndroidViewModel {
     public CategoriasViewModel(Application application) {
         super(application);
         categoriaDao = GshopRoom.getInstance(application).categoriaDao();
+    }
+
+    public Single<Categoria> getCategoriaById(long id) {
+        return categoriaDao.getCategoriaById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Single<List<Categoria>> getAllCategoria(){
