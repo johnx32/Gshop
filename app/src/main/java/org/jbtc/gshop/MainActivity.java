@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Log.e(TAG, "loadCategoriasFromFirebase no hay internet: ", e));
 
 
+
     }
 
     private void getFromFirebaseDatabase() {
