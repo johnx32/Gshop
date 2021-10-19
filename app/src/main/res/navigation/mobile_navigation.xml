@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_nav_productos_to_productoEditFragment"
             app:destination="@id/productoEditFragment" />
+        <action
+            android:id="@+id/action_nav_productos_to_productoAddFragment"
+            app:destination="@id/productoAddFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_pedidos"
@@ -62,6 +65,11 @@
         android:id="@+id/nav_clientes"
         android:name="org.jbtc.gshop.ui.clientes.ClientesFragment"
         android:label="Clientes" />
+
+    <fragment
+        android:id="@+id/productoAddFragment"
+        android:name="org.jbtc.gshop.ui.productos.producto.ProductoAddFragment"
+        android:label="Agregar Producto" />
 
 
 </navigation>

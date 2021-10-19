@@ -1,5 +1,6 @@
 package org.jbtc.gshop.ui.productos;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,23 +11,30 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentProductosBinding;
 import org.jbtc.gshop.adapter.ProductosAdapter;
 import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
+import org.jbtc.gshop.ui.productos.producto.ProductoAddFragment;
 
 import java.util.List;
 
 import io.reactivex.functions.BiConsumer;
 
 public class ProductosFragment extends Fragment {
+
     private FragmentProductosBinding binding;
     private ProductosAdapter adapter;
     private ProductosViewModel productosViewModel;
+
 
     @Nullable
     @Override
@@ -48,6 +56,14 @@ public class ProductosFragment extends Fragment {
 
         //NavHostFragment.findNavController(this)
                 //.navigate(R.id.action_nav_productos_to_productoEditFragment);
+
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(ProductosFragment.this)
+                        .navigate(R.id.action_nav_productos_to_productoAddFragment);
+            }
+        });
 
         return binding.getRoot();
     }
