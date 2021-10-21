@@ -37,4 +37,7 @@ public interface PedidoDao {
 
     @Query("delete from Pedido")
     Single<Integer> clearPedido();
+
+    @Insert
+    Single<Long[]> insertPedidos(List<Pedido> pedidoList);
 }
