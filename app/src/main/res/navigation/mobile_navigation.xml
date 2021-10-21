@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_nav_categorias_to_categoriaEditFragment"
             app:destination="@id/categoriaEditFragment" />
+        <action
+            android:id="@+id/action_nav_categorias_to_categoriaAddFragment"
+            app:destination="@id/categoriaAddFragment" />
     </fragment>
 
     <fragment
@@ -55,11 +58,11 @@
     <fragment
         android:id="@+id/productoEditFragment"
         android:name="org.jbtc.gshop.ui.productos.producto.ProductoEditFragment"
-        android:label="ProductoEditFragment" />
+        android:label="Editar Producto" />
     <fragment
         android:id="@+id/categoriaEditFragment"
         android:name="org.jbtc.gshop.ui.categorias.categoria.CategoriaEditFragment"
-        android:label="CategoriaEditFragment" />
+        android:label="Editar Categoria" />
 
     <fragment
         android:id="@+id/nav_clientes"
@@ -70,6 +73,11 @@
         android:id="@+id/productoAddFragment"
         android:name="org.jbtc.gshop.ui.productos.producto.ProductoAddFragment"
         android:label="Agregar Producto" />
+
+    <fragment
+        android:id="@+id/categoriaAddFragment"
+        android:name="org.jbtc.gshop.ui.categorias.categoria.CategoriaAddFragment"
+        android:label="Agregar Categoria" />
 
 
 </navigation>

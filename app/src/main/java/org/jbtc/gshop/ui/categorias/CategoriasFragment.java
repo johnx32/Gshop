@@ -21,6 +21,7 @@ import org.jbtc.gshop.databinding.FragmentCategoriasBinding;
 import org.jbtc.gshop.adapter.CategoriasAdapter;
 import org.jbtc.gshop.db.entity.Categoria;
 import org.jbtc.gshop.db.viewmodel.CategoriasViewModel;
+import org.jbtc.gshop.ui.productos.ProductosFragment;
 
 import java.util.List;
 
@@ -54,6 +55,14 @@ public class CategoriasFragment extends Fragment {
         /*NavHostFragment.findNavController(this)
                 .navigate(R.id.action_nav_categorias_to_categoriaEditFragment);
         //>>>>>>> devJorgeEditCategoria*/
+
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(CategoriasFragment.this)
+                        .navigate(R.id.action_nav_categorias_to_categoriaAddFragment);
+            }
+        });
 
         return binding.getRoot();
     }

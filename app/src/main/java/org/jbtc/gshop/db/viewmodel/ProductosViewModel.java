@@ -53,6 +53,24 @@ public class ProductosViewModel extends AndroidViewModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public void insertProductosForResult(Producto producto) {
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("categorias").child(producto.name_categoria).child(producto.key).setValue(producto)
+                .addOnSuccessListener(used -> {
+                    productoDao.updateProducto(producto)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe((integer, throwable) -> {
+                                if (throwable == null){
+                                    intUpdate.setValue(1);
+                                }else{
+                                    intUpdate.setValue(0);
+                                }
+                            });
+                }).addOnFailureListener(e -> intUpdate.setValue(0));
+    }
+
 
     public void updateProductoForResult(Producto producto) {
         productoDao.getProductoById(producto.id)

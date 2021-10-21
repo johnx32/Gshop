@@ -1,11 +1,10 @@
-package org.jbtc.gshop.ui.productos.producto;
+package org.jbtc.gshop.ui.categorias.categoria;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,18 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.jbtc.gshop.R;
-import org.jbtc.gshop.databinding.FragmentCategoriaEditBinding;
+import org.jbtc.gshop.databinding.FragmentCategoriaAddBinding;
 import org.jbtc.gshop.databinding.FragmentProductoAddBinding;
-import org.jbtc.gshop.db.viewmodel.CategoriasViewModel;
 
-public class ProductoAddFragment extends Fragment {
+public class CategoriaAddFragment extends Fragment {
 
-    private FragmentProductoAddBinding binding;
+    private FragmentCategoriaAddBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding =  FragmentProductoAddBinding.inflate(inflater,container,false);
+        binding =  FragmentCategoriaAddBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
 
