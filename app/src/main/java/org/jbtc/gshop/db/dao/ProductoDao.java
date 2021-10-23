@@ -46,4 +46,7 @@ public interface ProductoDao {
 
     @Insert
     Single<Long> insertProducto(Producto producto);
+
+    @Query("delete from Producto where name_categoria =:nombre")
+    Single<Integer> deleteProductoByCategoria(String nombre);
 }
