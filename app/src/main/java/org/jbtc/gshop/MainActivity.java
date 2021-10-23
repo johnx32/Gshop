@@ -23,8 +23,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.jbtc.gshop.databinding.ActivityMainBinding;
 import org.jbtc.gshop.db.entity.Categoria;
+import org.jbtc.gshop.db.entity.Item;
+import org.jbtc.gshop.db.entity.Pedido;
 import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.CategoriasViewModel;
+import org.jbtc.gshop.db.viewmodel.ItemViewModel;
+import org.jbtc.gshop.db.viewmodel.PedidosViewModel;
 import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
 
 import java.util.ArrayList;
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ProductosViewModel productosViewModel;
     private CategoriasViewModel categoriasViewModel;
+    private PedidosViewModel pedidosViewModel;
+    private ItemViewModel itemViewModel;
     private ActivityMainBinding binding;
     private DatabaseReference mDatabase;
 
@@ -48,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
         productosViewModel = new ViewModelProvider(this).get(ProductosViewModel.class);
         categoriasViewModel = new ViewModelProvider(this).get(CategoriasViewModel.class);
+        pedidosViewModel = new ViewModelProvider(this).get(PedidosViewModel.class);
+        itemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
@@ -97,6 +105,38 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Log.e(TAG, "loadCategoriasFromFirebase no hay internet: ", e));
 
+        DatabaseReference refClientes = database.getReference("pedidos");
+        refClientes.get()
+                .addOnCompleteListener( task -> {
+                    if(task.isSuccessful()){
+                        List<Pedido> pedidoList = new ArrayList<>();
+                        List<Item> itemList = new ArrayList<>();
+
+                        DataSnapshot dsClientes = task.getResult();
+                        for(DataSnapshot dsCliente : dsClientes.getChildren()){
+                            String uid = dsCliente.getKey();
+                            for(DataSnapshot dsPedido : dsCliente.getChildren()){
+                                String key = dsPedido.getKey();
+                                Pedido pedido = dsPedido.getValue(Pedido.class);
+                                pedido.uidCliente = uid;
+                                pedido.key = key;
+                                pedidoList.add(pedido);
+                                for(Item item:pedido.getCarrito()) item.keyPedido=key;
+                                itemList.addAll(pedido.getCarrito());
+                            }
+                        }
+
+                        Log.i(TAG, "loadCategoriasFromFirebase: pedidoList: "+pedidoList);
+                        Log.i(TAG, "loadCategoriasFromFirebase: itemList: "+itemList);
+                pedidosViewModel.clearPedido()
+                        .flatMap(integer -> itemViewModel.clearItem())
+                        .flatMap(integer -> pedidosViewModel.resetCounter())
+                        .flatMap(bool -> itemViewModel.resetCounter())
+                        .flatMap(bool -> pedidosViewModel.insertPedidos(pedidoList))
+                        .flatMap(longs -> itemViewModel.insertItems(itemList))
+                        .subscribe();
+            }
+        }).addOnFailureListener(e -> Log.e(TAG, "loadCategoriasFromFirebase: ", e) );
 
 
     }

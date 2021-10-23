@@ -18,6 +18,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import androidx.lifecycle.ViewModelProvider;
+
+import com.squareup.picasso.Picasso;
+
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentCategoriaEditBinding;
 import org.jbtc.gshop.db.entity.Categoria;
@@ -25,13 +29,17 @@ import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.CategoriasViewModel;
 import org.jbtc.gshop.ui.categorias.CategoriasFragment;
 
+import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
+
+
 import io.reactivex.functions.BiConsumer;
 
 public class CategoriaEditFragment extends Fragment {
+    private static final String TAG = "crmsl";
     private FragmentCategoriaEditBinding binding;
-
     private CategoriasViewModel categoriasViewModel;
     private Categoria categoria;
+
 
 
     @Override
@@ -44,11 +52,13 @@ public class CategoriaEditFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding =  FragmentCategoriaEditBinding.inflate(inflater,container,false);
+
         categoriasViewModel = new ViewModelProvider(this)
                 .get(CategoriasViewModel.class);
-        getBundle();
 
         getActivity().setTitle("Editar Categoria");
+        categoriasViewModel = new ViewModelProvider(this).get(CategoriasViewModel.class);
+        getBundle();
         return binding.getRoot();
     }
 
@@ -84,6 +94,29 @@ public class CategoriaEditFragment extends Fragment {
                 });
     }
 
+
+    private void    getBundle() {
+        Bundle b = getArguments();
+        if(b!=null){
+            long id = b.getLong("id");
+            categoriasViewModel.getCategoriaById(id)
+                    .subscribe(new BiConsumer<Categoria, Throwable>() {
+                        @Override
+                        public void accept(Categoria c, Throwable throwable) throws Exception {
+                            if (throwable==null){
+                                categoria=c;
+                                setCategoriaToLayout(c);
+                            }else Log.e(TAG, "accept: ",throwable );
+                        }
+                    });
+        }
+    }
+
+    private void setCategoriaToLayout(Categoria c) {
+
+        binding.etCatEditName.setText(c.nombre);
+    }
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         menu.clear();
@@ -91,24 +124,8 @@ public class CategoriaEditFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
 
     }
-//TODO: arreglar el getbundle para el selectOptionMenu
-    private void getBundle() {
-        Bundle b = getArguments();
-        if(b!=null){
-            long id = b.getLong("id");
-            categoriasViewModel.getCategoria(id)
-                    .subscribe((c, throwable) -> {
-                        if (throwable==null){
-                            categoria=c;
-                            setCategoriaToLayout(c);
-                        }else Log.e("", "accept: ",throwable );
-                    });
-        }
-    }
 
-    private void setCategoriaToLayout(Categoria c) {
-        binding.etCatEditName.setText(c.nombre);
-    }
+
 
     //TODO: AGREGAR EL METODO FALTANTE BASADO EN EL GETBUNDLE
     @Override

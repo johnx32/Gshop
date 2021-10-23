@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jbtc.gshop.R;
 import org.jbtc.gshop.db.entity.Categoria;
-import org.jbtc.gshop.db.entity.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.CategoriasViewHolder> {
+
+
 
     private List<Categoria> items = new ArrayList<>();
 

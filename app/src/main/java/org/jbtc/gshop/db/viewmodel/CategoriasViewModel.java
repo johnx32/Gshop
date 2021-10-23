@@ -33,6 +33,12 @@ public class CategoriasViewModel extends AndroidViewModel {
         categoriaDao = GshopRoom.getInstance(application).categoriaDao();
     }
 
+    public Single<Categoria> getCategoriaById(long id) {
+        return categoriaDao.getCategoriaById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public Single<List<Categoria>> getAllCategoria(){
         return categoriaDao.getAllCategoria()
                 .subscribeOn(Schedulers.io())
