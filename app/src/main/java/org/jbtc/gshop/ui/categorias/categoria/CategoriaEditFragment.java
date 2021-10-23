@@ -100,14 +100,11 @@ public class CategoriaEditFragment extends Fragment {
         if(b!=null){
             long id = b.getLong("id");
             categoriasViewModel.getCategoriaById(id)
-                    .subscribe(new BiConsumer<Categoria, Throwable>() {
-                        @Override
-                        public void accept(Categoria c, Throwable throwable) throws Exception {
-                            if (throwable==null){
-                                categoria=c;
-                                setCategoriaToLayout(c);
-                            }else Log.e(TAG, "accept: ",throwable );
-                        }
+                    .subscribe((c, throwable) -> {
+                        if (throwable==null){
+                            categoria=c;
+                            setCategoriaToLayout(c);
+                        }else Log.e(TAG, "accept: ",throwable );
                     });
         }
     }
