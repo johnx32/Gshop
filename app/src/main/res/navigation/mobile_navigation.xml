@@ -51,9 +51,10 @@
         android:name="org.jbtc.gshop.ui.pedidos.PedidosFragment"
         android:label="@string/menu_pedidos"
         tools:layout="@layout/fragment_pedidos" >
+
         <action
-            android:id="@+id/action_nav_pedidos_to_nav_clientes"
-            app:destination="@id/nav_clientes" />
+            android:id="@+id/action_nav_pedidos_to_pedidoMostrarFragment"
+            app:destination="@id/pedidoMostrarFragment" />
     </fragment>
     <fragment
         android:id="@+id/productoEditFragment"
@@ -68,7 +69,10 @@
         android:id="@+id/nav_clientes"
         android:name="org.jbtc.gshop.ui.clientes.ClientesFragment"
         android:label="Clientes" />
-
+    <fragment
+        android:id="@+id/pedidoMostrarFragment"
+        android:name="org.jbtc.gshop.ui.pedidos.pedido.PedidosMostrarFragment"
+        android:label="Pedido" />
     <fragment
         android:id="@+id/productoAddFragment"
         android:name="org.jbtc.gshop.ui.productos.producto.ProductoAddFragment"
