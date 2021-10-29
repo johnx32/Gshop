@@ -20,7 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Código del pedido"
         app:layout_constraintTop_toBottomOf="@+id/tv_codigo_pedidos"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -28,7 +27,6 @@
         android:id="@+id/et_fecha_pedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Fecha del pedido"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_precio_pedidos"
         app:layout_constraintVertical_bias="0.029"
