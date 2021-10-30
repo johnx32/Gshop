@@ -38,6 +38,7 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.PedidosV
     @Override
     public void onBindViewHolder( PedidosAdapter.PedidosViewHolder holder, int position) {
         holder.codigo.setText(items.get(position).key);
+        holder.fecha.setText(items.get(position).timestamp.toString());
     }
 
     @Override
@@ -51,8 +52,8 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidosAdapter.PedidosV
 
         public PedidosViewHolder(@NonNull View itemView) {
             super(itemView);
-            codigo = itemView.findViewById(R.id.et_codigo_pedido);
-            fecha = itemView.findViewById(R.id.et_fecha_pedido);
+            codigo = itemView.findViewById(R.id.tv_cv_pedido_cod);
+            fecha = itemView.findViewById(R.id.tv_cv_pedido_date);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

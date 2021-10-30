@@ -58,7 +58,7 @@ public class PedidosFragment extends Fragment {
                 Bundle b = new Bundle();
                 b.putLong("id",pedido.id);
                 NavHostFragment.findNavController(PedidosFragment.this)
-                        .navigate(R.id.action_nav_pedidos_to_nav_clientes,b);
+                        .navigate(R.id.action_nav_pedidos_to_pedidoMostrarFragment,b);
             }
         });
         binding.rvPedList.setAdapter(adapter);
