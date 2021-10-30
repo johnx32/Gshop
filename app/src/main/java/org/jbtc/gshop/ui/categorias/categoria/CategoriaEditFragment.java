@@ -30,6 +30,7 @@ import org.jbtc.gshop.db.viewmodel.CategoriasViewModel;
 import org.jbtc.gshop.ui.categorias.CategoriasFragment;
 
 import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
+import org.jbtc.gshop.ui.productos.producto.ProductoEditFragment;
 
 
 import io.reactivex.functions.BiConsumer;
@@ -59,6 +60,7 @@ public class CategoriaEditFragment extends Fragment {
         getActivity().setTitle("Editar Categoria");
         categoriasViewModel = new ViewModelProvider(this).get(CategoriasViewModel.class);
         getBundle();
+        initLiveData();
         return binding.getRoot();
     }
 
@@ -92,6 +94,29 @@ public class CategoriaEditFragment extends Fragment {
                         }
                     }
                 });
+
+        categoriasViewModel.updateCategoriaResult().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if (integer > 0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage("La categoria se actualizo exitosamente")
+                            .setTitle("Update")
+                            .setPositiveButton("OK", null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    NavHostFragment.findNavController(CategoriaEditFragment.this).popBackStack();
+                }
+                else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage("Por un error no se pudo modificar la categoria")
+                            .setTitle("Error")
+                            .setPositiveButton("Entendido", null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        });
     }
 
 
@@ -99,7 +124,7 @@ public class CategoriaEditFragment extends Fragment {
         Bundle b = getArguments();
         if(b!=null){
             long id = b.getLong("id");
-            categoriasViewModel.getCategoriaById(id)
+            categoriasViewModel.getCategoria(id)
                     .subscribe((c, throwable) -> {
                         if (throwable==null){
                             categoria=c;
@@ -112,6 +137,28 @@ public class CategoriaEditFragment extends Fragment {
     private void setCategoriaToLayout(Categoria c) {
 
         binding.etCatEditName.setText(c.nombre);
+    }
+
+    private Categoria getCategoriaFromLayout(){
+        categoria.nombre = binding.etCatEditName.getText().toString();
+        return  categoria;
+    }
+
+    private void initLiveData() {
+        categoriasViewModel.updateCategoriaResult()
+                .observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        if(integer>0) {
+                            //todo: mostrar mensaje dialo
+                            NavHostFragment.findNavController(CategoriaEditFragment.this)
+                                    .popBackStack();
+                            //else
+                            //todo: mensaje de error
+                        }
+
+                    }
+                });
     }
 
     @Override
@@ -128,7 +175,13 @@ public class CategoriaEditFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_delete: categoriasViewModel.deleteCategoriaForResult(categoria);
+            case R.id.action_delete:
+                categoriasViewModel.deleteCategoriaForResult(categoria);
+                break;
+            case R.id.action_checkout:
+                String oldCategoria = categoria.nombre;
+
+                categoriasViewModel.updateCategoriaForResult(getCategoriaFromLayout(), oldCategoria);
                 break;
         }
         return super.onOptionsItemSelected(item);

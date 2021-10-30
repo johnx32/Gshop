@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                                     .flatMap(aBoolean -> productosViewModel.resetCounter())
                                     .flatMap(aBoolean -> productosViewModel.insertProductos(productoList))
                                     .flatMap(longs -> categoriasViewModel.insertCategorias(categoriaList))
+
                                     .subscribe();
                         }else{ /*si no hay internet no eliminara nada*/ }
                     }

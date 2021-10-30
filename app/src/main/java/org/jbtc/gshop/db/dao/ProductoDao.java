@@ -11,6 +11,7 @@ import org.jbtc.gshop.db.entity.Producto;
 import java.util.List;
 
 import io.reactivex.Single;
+import io.reactivex.SingleSource;
 
 @Dao
 public interface ProductoDao {
@@ -49,4 +50,7 @@ public interface ProductoDao {
 
     @Query("delete from Producto where name_categoria =:nombre")
     Single<Integer> deleteProductoByCategoria(String nombre);
+
+    @Query("update Producto set name_categoria=:newCategoria where name_categoria=:oldCategoria")
+    Single<Integer> updateProductoSetCategoria(String oldCategoria, String newCategoria);
 }
