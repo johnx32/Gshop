@@ -23,8 +23,10 @@ import org.jbtc.gshop.R;
 import org.jbtc.gshop.databinding.FragmentProductoEditBinding;
 import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
+import org.jbtc.gshop.ui.categorias.categoria.CategoriaEditFragment;
 
 import io.reactivex.functions.BiConsumer;
+import okhttp3.internal.cache.DiskLruCache;
 
 public class ProductoEditFragment extends Fragment {
     private static final String TAG = "crmsl";
@@ -36,6 +38,36 @@ public class ProductoEditFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        productosViewModel.deleteProductoResult()
+                .observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        if (integer > 0){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setMessage("El producto se elmino exitosamente")
+                                    .setTitle("Eliminar")
+                                    .setPositiveButton("OK", null);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                            NavHostFragment.findNavController(ProductoEditFragment.this)
+                                    .popBackStack();
+                        }
+                        else{
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setMessage("Por un error no se pudo eliminar el Producto")
+                                    .setTitle("Error")
+                                    .setPositiveButton("Entendido", null);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+                    }
+                });
     }
 
     @Nullable
@@ -116,7 +148,7 @@ public class ProductoEditFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_delete:
-                
+                productosViewModel.deleteProductoForResult(producto);
                 break;
             case R.id.action_checkout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

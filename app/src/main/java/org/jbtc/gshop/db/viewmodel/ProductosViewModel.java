@@ -149,6 +149,7 @@ public class ProductosViewModel extends AndroidViewModel {
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe((integer, throwable) -> {
+                                Log.i(TAG, "deleteProductoForResult integer: " + integer);
                                 if (throwable == null){
                                     intDelete.setValue(1);
                                 }else{
