@@ -28,6 +28,8 @@ public class ProductosViewModel extends AndroidViewModel {
     private ProductoDao productoDao;
     private MutableLiveData<Integer> intUpdate;
     private MutableLiveData<Integer> intDelete;
+    private MutableLiveData<Long> longCreate;
+
 
     public ProductosViewModel(Application application) {
         super(application);
@@ -56,21 +58,29 @@ public class ProductosViewModel extends AndroidViewModel {
     public void insertProductosForResult(Producto producto) {
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("categorias").child(producto.name_categoria).child(producto.key).setValue(producto)
+        DatabaseReference cat = mDatabase.child("categorias").child(producto.name_categoria);
+        String key = cat.push().getKey();
+        producto.key = key;
+                cat.child(key).setValue(producto)
                 .addOnSuccessListener(used -> {
-                    productoDao.updateProducto(producto)
+                    productoDao.insertProducto(producto)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe((integer, throwable) -> {
                                 if (throwable == null){
-                                    intUpdate.setValue(1);
+                                    longCreate.setValue(1L);
                                 }else{
-                                    intUpdate.setValue(0);
+                                    longCreate.setValue(0L);
                                 }
                             });
-                }).addOnFailureListener(e -> intUpdate.setValue(0));
+                }).addOnFailureListener(e -> longCreate.setValue(0L));
     }
 
+    public LiveData<Long> insertProductoResult() {
+        if (longCreate == null)
+            longCreate = new MutableLiveData<Long>();
+        return longCreate;
+    }
 
     public void updateProductoForResult(Producto producto) {
         productoDao.getProductoById(producto.id)

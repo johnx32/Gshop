@@ -55,7 +55,7 @@ public class ProductoEditFragment extends Fragment {
         p.nombre = binding.etProdEditName.getText().toString();
         p.descripcion = binding.etProdEditDescip.getText().toString();
         p.precio = Integer.parseInt(binding.etProdEditName.getText().toString());
-
+        p.url = binding.imgProdEdit.getDrawable().toString();
 
         return p;
     }
@@ -126,6 +126,7 @@ public class ProductoEditFragment extends Fragment {
                         .setPositiveButton("SI",(dialog, which) -> {
                             producto = getProductoFromLayout();
                             productosViewModel.updateProductoForResult(producto);
+//                            productosViewModel.insertProductosForResult(producto);
                         });
                 AlertDialog dialog = builder.create();
                 dialog.show();
