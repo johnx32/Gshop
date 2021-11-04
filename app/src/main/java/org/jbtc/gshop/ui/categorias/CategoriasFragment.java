@@ -3,6 +3,8 @@ package org.jbtc.gshop.ui.categorias;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,6 +33,12 @@ public class CategoriasFragment extends Fragment {
     private FragmentCategoriasBinding binding;
     private CategoriasAdapter adapter;
     private CategoriasViewModel categoriasViewModel;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
@@ -82,5 +90,12 @@ public class CategoriasFragment extends Fragment {
         });
         binding.rvCatList.setAdapter(adapter);
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 
 }

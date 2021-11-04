@@ -3,6 +3,8 @@ package org.jbtc.gshop.ui.pedidos;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -25,6 +27,13 @@ public class PedidosFragment extends Fragment {
     private FragmentPedidosBinding binding;
     private PedidosAdapter adapter;
     private PedidosViewModel pedidosViewModel;
+
+
+    @Override
+    public void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +72,9 @@ public class PedidosFragment extends Fragment {
         });
         binding.rvPedList.setAdapter(adapter);
     }
-
+    public void onCreateOptionsMenu( Menu menu, MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
 }
