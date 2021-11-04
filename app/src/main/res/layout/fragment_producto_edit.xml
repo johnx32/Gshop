@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ui.productos.producto.ProductoEditFragment">
-
+<!--    agregar spinner para modificar la categoria, tambien agrega edittext para la url -->
     <ImageView
         android:id="@+id/img_prod_edit"
         android:layout_width="100dp"

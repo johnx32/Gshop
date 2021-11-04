@@ -12,7 +12,7 @@ import org.jbtc.gshop.databinding.FragmentPedidosMostrarBinding;
 
 public class PedidosMostrarFragment extends Fragment {
     private  FragmentPedidosMostrarBinding binding;
-
+    //   mostrar los datos del pedido
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

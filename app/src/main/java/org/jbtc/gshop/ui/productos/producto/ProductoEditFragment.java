@@ -81,15 +81,15 @@ public class ProductoEditFragment extends Fragment {
     }
 
     private Producto getProductoFromLayout(){
-        Producto p=new Producto();
-        p.id=producto.id;
-        //todo:p.descripcion = binding.
-        p.nombre = binding.etProdEditName.getText().toString();
-        p.descripcion = binding.etProdEditDescip.getText().toString();
-        p.precio = Integer.parseInt(binding.etProdEditName.getText().toString());
-        p.url = binding.imgProdEdit.getDrawable().toString();
 
-        return p;
+        //p.id=producto.id;
+        producto.nombre = binding.etProdEditName.getText().toString();
+        producto.descripcion = binding.etProdEditDescip.getText().toString();
+        producto.precio = Integer.parseInt(binding.etProdEditPrecio.getText().toString());
+        //todo:agregar en el XML edittext para url, agregar combobox/spinner
+        //p.url = binding.imgProdEdit.getDrawable().toString();
+
+        return producto;
     }
 
     private void initLiveData() {
@@ -98,11 +98,11 @@ public class ProductoEditFragment extends Fragment {
                     @Override
                     public void onChanged(Integer integer) {
                         if(integer>0) {
-                            //todo: mostrar mensaje dialo
+                            //todo: mostrar mensaje dialo "producto actualizado con exito"
                             NavHostFragment.findNavController(ProductoEditFragment.this)
                                     .popBackStack();
                             //else
-                            //todo: mensaje de error
+                            //todo: mensaje de error, no se actualizo el producto
                         }
 
                     }
@@ -152,8 +152,8 @@ public class ProductoEditFragment extends Fragment {
                 break;
             case R.id.action_checkout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("Esta seguro que desea eliminar el producto")
-                        .setTitle("Eliminar")
+                builder.setMessage("Esta seguro que desea guardar los cambios en el producto")
+                        .setTitle("Actualizar")
                         .setNegativeButton("NO",null)
                         .setPositiveButton("SI",(dialog, which) -> {
                             producto = getProductoFromLayout();

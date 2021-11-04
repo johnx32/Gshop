@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
-
+<!--reemplazar el grid layout por 3 linearlayout-->
     <TextView
         android:id="@+id/tv_menu_name"
         android:layout_width="wrap_content"

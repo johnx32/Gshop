@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".ui.pedidos.pedido.PedidosMostrarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ped_list"

@@ -16,4 +16,6 @@
         android:textSize="15sp"
         android:text="Categoria"/>
 
+<!--   agregar boton para ir aun fragment donde muestre los productos de esta categoria -->
+
 </LinearLayout>

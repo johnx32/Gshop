@@ -150,12 +150,12 @@ public class CategoriaEditFragment extends Fragment {
                     @Override
                     public void onChanged(Integer integer) {
                         if(integer>0) {
-                            //todo: mostrar mensaje dialo
+                            //todo: mostrar mensaje dialo se actualizo con exito
                             NavHostFragment.findNavController(CategoriaEditFragment.this)
                                     .popBackStack();
+                        }
                             //else
                             //todo: mensaje de error
-                        }
 
                     }
                 });
@@ -171,7 +171,6 @@ public class CategoriaEditFragment extends Fragment {
 
 
 
-    //TODO: AGREGAR EL METODO FALTANTE BASADO EN EL GETBUNDLE
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){

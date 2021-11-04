@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private DatabaseReference mDatabase;
 
+    //todo: eliminar el menu por defecto en los fragment "categoria" "producto" etc
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
-        //todo: aqui falta hacer x cosa
         createDrawerLayout();
 
         //getFromFirebaseDatabase();

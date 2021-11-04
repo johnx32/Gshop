@@ -10,13 +10,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -37,6 +41,12 @@ public class ProductoAddFragment extends Fragment {
     private ProductosViewModel productosViewModel;
     private static final String TAG = "crmsl";
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,21 +57,37 @@ public class ProductoAddFragment extends Fragment {
         return binding.getRoot();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initLiveData();
+        binding.etProdAddUrl.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.i(TAG, "beforeTextChanged: before "+s);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.i(TAG, "onTextChanged: text "+s);
+                if(s!=null && s.length()>0)
+                Picasso.get()
+                        .load(s.toString())
+                        .into(binding.imgProdEdit);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.i(TAG, "afterTextChanged:after  s: "+s.toString());
+            }
+        });
     }
 
     private Producto getProductoFromLayout() {
         Producto p = new Producto();
-        p.nombre = binding.etProdAddPrecio.getText().toString();
+        p.nombre = binding.etProdAddName.getText().toString();
         p.descripcion = binding.etProdAddDescip.getText().toString();
         p.precio = Integer.parseInt(binding.etProdAddPrecio.getText().toString());
         p.url = binding.etProdAddUrl.getText().toString();
@@ -76,7 +102,6 @@ public class ProductoAddFragment extends Fragment {
                     @Override
                     public void onChanged(Long long1) {
                         if(long1>0) {
-                            //todo: mostrar mensaje dialo
                             NavHostFragment.findNavController(ProductoAddFragment.this)
                                     .popBackStack();
 
@@ -86,7 +111,6 @@ public class ProductoAddFragment extends Fragment {
                                     .setPositiveButton("OK", null);
                             AlertDialog dialog = builder.create();
                             dialog.show();
-                            //todo: mensaje de error
                         }
                         else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
