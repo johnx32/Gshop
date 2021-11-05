@@ -151,11 +151,24 @@ public class CategoriaEditFragment extends Fragment {
                     public void onChanged(Integer integer) {
                         if(integer>0) {
                             //todo: mostrar mensaje dialo se actualizo con exito
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setMessage("Se Actualizo Con Exito")
+                                    .setTitle("OK")
+                                    .setPositiveButton("Entendido", null);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                             NavHostFragment.findNavController(CategoriaEditFragment.this)
                                     .popBackStack();
-                        }
-                            //else
+                        } else {
                             //todo: mensaje de error
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setMessage("Error no se pudo modificar")
+                                    .setTitle("Error")
+                                    .setPositiveButton("Entendido", null);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }
+
 
                     }
                 });
