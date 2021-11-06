@@ -97,12 +97,25 @@ public class ProductoEditFragment extends Fragment {
                 .observe(getViewLifecycleOwner(), new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer integer) {
-                        if(integer>0) {
+                        if (integer > 0) {
                             //todo: mostrar mensaje dialo "producto actualizado con exito"
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setMessage("El producto se Actualizo con exito")
+                                    .setTitle("Actualizado")
+                                    .setPositiveButton("OK", null);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                             NavHostFragment.findNavController(ProductoEditFragment.this)
                                     .popBackStack();
                             //else
                             //todo: mensaje de error, no se actualizo el producto
+                        } else{
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            builder.setMessage("El producto se no se Actualizo")
+                                    .setTitle("Error")
+                                    .setPositiveButton("OK", null);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         }
 
                     }
