@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.ProductosViewHolder> {
+
     private List<Producto> items = new ArrayList<>();
 
 
@@ -71,6 +72,7 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
                     onClick.onClickCard(items.get(getAdapterPosition()));
                 }
             });
+            
         }
     }
     private OnClick onClick;
