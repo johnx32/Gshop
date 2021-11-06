@@ -60,7 +60,6 @@ public class CategoriaEditFragment extends Fragment {
         getActivity().setTitle("Editar Categoria");
         categoriasViewModel = new ViewModelProvider(this).get(CategoriasViewModel.class);
         getBundle();
-        initLiveData();
         return binding.getRoot();
     }
 
@@ -95,7 +94,8 @@ public class CategoriaEditFragment extends Fragment {
                     }
                 });
 
-        categoriasViewModel.updateCategoriaResult().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+        categoriasViewModel.updateCategoriaResult()
+                .observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 if (integer > 0){
@@ -120,7 +120,7 @@ public class CategoriaEditFragment extends Fragment {
     }
 
 
-    private void    getBundle() {
+    private void getBundle() {
         Bundle b = getArguments();
         if(b!=null){
             long id = b.getLong("id");
@@ -144,36 +144,6 @@ public class CategoriaEditFragment extends Fragment {
         return  categoria;
     }
 
-    private void initLiveData() {
-        categoriasViewModel.updateCategoriaResult()
-                .observe(getViewLifecycleOwner(), new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer integer) {
-                        if(integer>0) {
-                            //todo: mostrar mensaje dialo se actualizo con exito
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("Se Actualizo Con Exito")
-                                    .setTitle("OK")
-                                    .setPositiveButton("Entendido", null);
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-                            NavHostFragment.findNavController(CategoriaEditFragment.this)
-                                    .popBackStack();
-                        } else {
-                            //todo: mensaje de error
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("Error no se pudo modificar")
-                                    .setTitle("Error")
-                                    .setPositiveButton("Entendido", null);
-                            AlertDialog dialog = builder.create();
-                            dialog.show();
-                        }
-
-
-                    }
-                });
-    }
-
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         menu.clear();
@@ -182,18 +152,30 @@ public class CategoriaEditFragment extends Fragment {
 
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         switch (item.getItemId()){
             case R.id.action_delete:
-                categoriasViewModel.deleteCategoriaForResult(categoria);
+                    builder.setMessage("¿Esta seguro que desea eliminar esta categoria?")
+                            .setTitle("Eliminacion")
+                            .setNegativeButton("NO",null)
+                            .setPositiveButton("SI",(dialog, which) -> categoriasViewModel.deleteCategoriaForResult(categoria) );
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 break;
             case R.id.action_checkout:
-                String oldCategoria = categoria.nombre;
+                // todo: revisar la ortografia de todos los mensajes dialog
 
-                categoriasViewModel.updateCategoriaForResult(getCategoriaFromLayout(), oldCategoria);
+                    builder.setMessage("¿Desea confirmar los cambios en la categoria?")
+                            .setTitle("Actualizacion")
+                            .setNegativeButton("NO",null)
+                            .setPositiveButton("SI",(dialog2, which) -> {
+                                String oldCategoria = categoria.nombre;
+                                categoriasViewModel.updateCategoriaForResult(getCategoriaFromLayout(), oldCategoria);
+                            });
+                    AlertDialog dialogo = builder.create();
+                    dialogo.show();
                 break;
         }
         return super.onOptionsItemSelected(item);

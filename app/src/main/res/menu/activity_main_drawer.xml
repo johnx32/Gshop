@@ -21,10 +21,10 @@
             android:icon="@drawable/ic_menu_pedido_2"
             android:title="@string/menu_pedidos" />
 
-        <item
+        <!--<item
             android:id="@+id/nav_clientes"
             android:icon="@drawable/ic_menu_cliente_2"
-            android:title="@string/menu_Clientes" />
+            android:title="@string/menu_Clientes" />-->
 
     </group>
 </menu>
