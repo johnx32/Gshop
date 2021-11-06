@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
 <!--reemplazar el grid layout por 3 linearlayout-->
     <TextView
@@ -12,33 +13,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"
         android:text="Gshop Menu"
         android:textColor="@color/design_default_color_primary_dark"
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_menu_name"
-        android:columnCount="2"
-        android:layout_marginTop="20dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_home_categories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
 
             <LinearLayout
+                android:id="@+id/ll_categorias"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"
+                >
 
                 <ImageView
                     android:id="@+id/btn_go_categorias"
@@ -54,22 +47,19 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_home_products"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+
+
 
             <LinearLayout
+                android:id="@+id/ll_products"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                >
 
                 <ImageView
                     android:layout_width="150dp"
@@ -85,22 +75,18 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_home_pedidos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+
+
 
             <LinearLayout
+                android:id="@+id/ll_pedidos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp">
 
                 <ImageView
                     android:layout_width="150dp"
@@ -116,7 +102,5 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </GridLayout>
 
-</RelativeLayout>
+</LinearLayout>

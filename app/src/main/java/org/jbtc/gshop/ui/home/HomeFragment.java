@@ -45,15 +45,15 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.cvHomeProducts.setOnClickListener(v ->
+        binding.llProducts.setOnClickListener(v ->
                 NavHostFragment.findNavController(this)
                 .navigate(R.id.action_nav_home_to_nav_productos) );
 
-        binding.cvHomePedidos.setOnClickListener(v ->
+        binding.llPedidos.setOnClickListener(v ->
                 NavHostFragment.findNavController(this)
                         .navigate(R.id.action_nav_home_to_nav_pedidos) );
 
-        binding.cvHomeCategories.setOnClickListener(v ->
+        binding.llCategorias.setOnClickListener(v ->
                 NavHostFragment.findNavController(this)
                         .navigate(R.id.action_nav_home_to_nav_categorias) );
 
