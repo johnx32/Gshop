@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private DatabaseReference mDatabase;
 
+    /*
+     todo: ver aplicaciones en playstore de shop manager store
+           buscar UI ejemplo
+     */
 
 
     @Override

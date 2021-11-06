@@ -50,12 +50,12 @@ public class CategoriasAdapter extends RecyclerView.Adapter<CategoriasAdapter.Ca
     }
 
     public class CategoriasViewHolder extends RecyclerView.ViewHolder{
-        ImageView img;
+        //ImageView img;
         TextView name;
 
         public CategoriasViewHolder(@NonNull View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.iv_cv_cat_img);
+            //img = itemView.findViewById(R.id.iv_cv_cat_img);
             name = itemView.findViewById(R.id.tv_cv_cat_name);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

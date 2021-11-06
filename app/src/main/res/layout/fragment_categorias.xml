@@ -20,8 +20,7 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/descrip"
         android:src="@drawable/ic_input_add"
-        app:tint="@android:color/white"
-        android:backgroundTint="@color/purple_500"/>
+        app:tint="@android:color/white"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
