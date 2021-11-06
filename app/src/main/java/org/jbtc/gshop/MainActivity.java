@@ -3,6 +3,7 @@ package org.jbtc.gshop;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.inputmethod.InputMethodManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private DatabaseReference mDatabase;
 
-    //todo: eliminar el menu por defecto en los fragment "categoria" "producto" etc
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,7 +187,8 @@ public class MainActivity extends AppCompatActivity {
                 R.id.nav_categorias,
                 R.id.nav_productos,
                 R.id.nav_pedidos)
-                .setDrawerLayout(drawer)
+                //.setDrawerLayout(drawer)
+                .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -212,6 +214,5 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
-
 
 }
