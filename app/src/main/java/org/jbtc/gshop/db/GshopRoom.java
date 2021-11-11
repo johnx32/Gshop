@@ -26,7 +26,7 @@ import org.jbtc.gshop.db.entity.Cliente;
         Cliente.class,
         Pedido.class,
         Item.class
-}, version = 1)
+}, version = 1, exportSchema = false)
 @TypeConverters({DateLongConverter.class})
 public abstract class GshopRoom extends RoomDatabase {
 

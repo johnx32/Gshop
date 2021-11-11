@@ -40,4 +40,7 @@ public interface PedidoDao {
 
     @Insert
     Single<Long[]> insertPedidos(List<Pedido> pedidoList);
+
+    @Query("select * from pedido where id=:id")
+    Single<Pedido> getPedido(long id);
 }

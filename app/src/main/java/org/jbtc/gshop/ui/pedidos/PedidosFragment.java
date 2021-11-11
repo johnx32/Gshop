@@ -72,6 +72,7 @@ public class PedidosFragment extends Fragment {
         });
         binding.rvPedList.setAdapter(adapter);
     }
+
     public void onCreateOptionsMenu( Menu menu, MenuInflater inflater) {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
