@@ -55,4 +55,10 @@ public class ItemViewModel extends AndroidViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public Single<Long[]> getItemsIdsByPedido(String keyPedido) {
+        return itemDao.getItemsIdsByPedido(keyPedido)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 }

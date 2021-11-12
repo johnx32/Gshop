@@ -17,4 +17,7 @@ public interface ItemDao {
 
     @Insert
     Single<Long[]> insetItems(List<Item> itemList);
+
+    @Query("select id from item where keyPedido=:keyPedido")
+    Single<Long[]> getItemsIdsByPedido(String keyPedido);
 }
