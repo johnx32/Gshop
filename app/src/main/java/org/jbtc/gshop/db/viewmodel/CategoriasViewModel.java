@@ -31,6 +31,7 @@ public class CategoriasViewModel extends AndroidViewModel {
     private final CategoriaDao categoriaDao;
     private MutableLiveData<Integer> intDelete;
     private MutableLiveData<Integer> intUpdate;
+    private MutableLiveData<Long> longCreate;
 
     public CategoriasViewModel(Application application) {
         super(application);
@@ -78,6 +79,27 @@ public class CategoriasViewModel extends AndroidViewModel {
         return categoriaDao.insertCategorias(categoriaList)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public void insertCategoriaResult(Categoria categoria) {
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference cat = mDatabase.child("categorias").child(categoria.nombre);
+        String key = cat.push().getKey();
+        categoria.nombre = key;
+        cat.child(key).setValue(categoria)
+                .addOnSuccessListener(used -> {
+                    categoriaDao.insertCategorias((List<Categoria>) categoria)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe((integer, throwable) -> {
+                                if (throwable == null){
+                                    longCreate.setValue(1L);
+                                }else{
+                                    longCreate.setValue(0L);
+                                }
+                            });
+                }).addOnFailureListener(e -> longCreate.setValue(0L));
     }
 
     public Single<Categoria> getCategoria(long id) {
@@ -148,5 +170,11 @@ public class CategoriasViewModel extends AndroidViewModel {
         if (intDelete == null)
             intDelete = new MutableLiveData<Integer>();
         return intDelete;
+    }
+
+    public LiveData<Long> insertCategoriaResult() {
+        if (longCreate == null)
+            longCreate = new MutableLiveData<Long>();
+        return longCreate;
     }
 }

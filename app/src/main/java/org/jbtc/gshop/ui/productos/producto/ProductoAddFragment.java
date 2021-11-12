@@ -106,7 +106,7 @@ public class ProductoAddFragment extends Fragment {
                                     .popBackStack();
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("el Producto se ha insertado con exito")
+                            builder.setMessage("El Producto se ha insertado con éxito")
                                     .setTitle("Insertar")
                                     .setPositiveButton("OK", null);
                             AlertDialog dialog = builder.create();
@@ -114,7 +114,7 @@ public class ProductoAddFragment extends Fragment {
                         }
                         else {
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("No se pudo insertar el producto")
+                            builder.setMessage("No se pudo insertar el Producto")
                                     .setTitle("Insertar")
                                     .setPositiveButton("OK", null);
                             AlertDialog dialog = builder.create();
@@ -137,7 +137,7 @@ public class ProductoAddFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_checkout: AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("Esta seguro que desea agregar el producto")
+                builder.setMessage("¿Esta seguro que desea agregar el Producto?")
                         .setTitle("Agregar")
                         .setNegativeButton("NO", null)
                         .setPositiveButton("SI",(dialog, which) -> {

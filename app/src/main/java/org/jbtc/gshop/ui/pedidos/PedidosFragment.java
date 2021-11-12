@@ -7,7 +7,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -56,6 +59,12 @@ public class PedidosFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        closeKeyboard();
+    }
+
     private void initAdapter() {
         binding.rvPedList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -75,6 +84,12 @@ public class PedidosFragment extends Fragment {
     public void onCreateOptionsMenu( Menu menu, MenuInflater inflater) {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    private void closeKeyboard(){
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(getActivity().INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 
 }
