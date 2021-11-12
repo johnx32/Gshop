@@ -6,7 +6,9 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import org.jbtc.gshop.db.entity.Pedido;
 import org.jbtc.gshop.db.entity.Producto;
+import org.jbtc.gshop.db.entity.ProductoCantidad;
 
 import java.util.List;
 
@@ -53,4 +55,7 @@ public interface ProductoDao {
 
     @Query("update Producto set name_categoria=:newCategoria where name_categoria=:oldCategoria")
     Single<Integer> updateProductoSetCategoria(String oldCategoria, String newCategoria);
+
+    @Query("select i.cantidad,p.* from item i,producto p where i.`key`=p.`key` and i.keyPedido=:keyPedido")
+    Single<List<ProductoCantidad>> getProductosByPedido(String keyPedido);
 }

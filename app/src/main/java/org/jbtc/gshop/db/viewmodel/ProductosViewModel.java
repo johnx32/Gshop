@@ -14,7 +14,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.jbtc.gshop.db.GshopRoom;
 import org.jbtc.gshop.db.dao.ProductoDao;
+import org.jbtc.gshop.db.entity.Pedido;
 import org.jbtc.gshop.db.entity.Producto;
+import org.jbtc.gshop.db.entity.ProductoCantidad;
 
 import java.util.List;
 
@@ -200,5 +202,11 @@ public class ProductosViewModel extends AndroidViewModel {
             }
         });
 
+    }
+
+    public Single<List<ProductoCantidad>> getProductosByPedido(String keyPedido) {
+        return productoDao.getProductosByPedido(keyPedido)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

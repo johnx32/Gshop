@@ -1,6 +1,7 @@
 package org.jbtc.gshop.db.entity;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -10,8 +11,10 @@ public class Categoria {
     public long id;
     public String nombre;
 
+
     public Categoria() {
     }
+
 
     public Categoria(String nombre) {
         this.nombre = nombre;
