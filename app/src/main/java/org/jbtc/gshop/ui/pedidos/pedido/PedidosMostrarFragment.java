@@ -13,14 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import org.jbtc.gshop.adapter.ItemsAdapter;
 import org.jbtc.gshop.databinding.FragmentPedidosMostrarBinding;
-import org.jbtc.gshop.db.entity.Item;
 import org.jbtc.gshop.db.entity.Pedido;
-import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.ItemViewModel;
 import org.jbtc.gshop.db.viewmodel.PedidosViewModel;
 import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
-
-import java.util.List;
 
 
 public class PedidosMostrarFragment extends Fragment {
@@ -30,8 +26,6 @@ public class PedidosMostrarFragment extends Fragment {
     private ProductosViewModel productosViewModel;
     private ItemsAdapter adapter;
     private Pedido pedido;
-    private List<Item> itemList;
-    private List<Producto> productoList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -32,8 +32,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         holder.cantidad.setText(String.valueOf(items.get(position).cantidad));
         holder.nombre.setText(items.get(position).producto.nombre);
-        holder.price.setText(items.get(position).cantidad+" $");
-        holder.pricePartial.setText(items.get(position).cantidad+" $");
+        holder.price.setText(items.get(position).producto.precio+" $");
+        holder.pricePartial.setText(items.get(position).cantidad*items.get(position).producto.precio+" $");
     }
 
     @Override

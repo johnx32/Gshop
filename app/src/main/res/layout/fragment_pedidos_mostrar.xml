@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.pedidos.pedido.PedidosMostrarFragment">
-    <!--todo dar estilo al recyclerview, cambiar edittext's por textview's-->
+    <!--todo dar estilo al recyclerview, cambiar edittext's por textview's, agregar importe total-->
     <TextView
         android:id="@+id/tv_pedido_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="@string/titulo_pedido"/>
 
     <TextView
@@ -43,10 +44,6 @@
         android:id="@+id/rv_ped_mostrar_items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/et_fecha_pedido"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-         />
+        tools:listitem="@layout/cardview_item_producto"/>
 
 </LinearLayout>
