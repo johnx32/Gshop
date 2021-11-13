@@ -57,7 +57,7 @@ public class CategoriaEditFragment extends Fragment {
         categoriasViewModel = new ViewModelProvider(this)
                 .get(CategoriasViewModel.class);
 
-        getActivity().setTitle("Editar Categoria");
+        getActivity().setTitle("Editar Categoría");
         categoriasViewModel = new ViewModelProvider(this).get(CategoriasViewModel.class);
         getBundle();
         return binding.getRoot();
@@ -73,7 +73,7 @@ public class CategoriaEditFragment extends Fragment {
                     public void onChanged(Integer integer) {
                         if (integer > 0){
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("La categoria se elmino exitosamente")
+                            builder.setMessage("La Categoría se eliminó exitosamente")
                                     .setTitle("Eliminar")
                                     .setPositiveButton("OK", null);
                             AlertDialog dialog = builder.create();
@@ -84,7 +84,7 @@ public class CategoriaEditFragment extends Fragment {
                         }
                         else{
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("Por un error no se pudo eliminar la categoria")
+                            builder.setMessage("Por un error no se pudo eliminar la Categoría")
                                     .setTitle("Error")
                                     .setPositiveButton("Entendido", null);
                             AlertDialog dialog = builder.create();
@@ -100,7 +100,7 @@ public class CategoriaEditFragment extends Fragment {
             public void onChanged(Integer integer) {
                 if (integer > 0){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setMessage("La categoria se actualizo exitosamente")
+                    builder.setMessage("La Categoría se actualizó exitosamente")
                             .setTitle("Update")
                             .setPositiveButton("OK", null);
                     AlertDialog dialog = builder.create();
@@ -109,7 +109,7 @@ public class CategoriaEditFragment extends Fragment {
                 }
                 else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setMessage("Por un error no se pudo modificar la categoria")
+                    builder.setMessage("Por un error no se pudo modificar la Categoría")
                             .setTitle("Error")
                             .setPositiveButton("Entendido", null);
                     AlertDialog dialog = builder.create();
@@ -157,8 +157,8 @@ public class CategoriaEditFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         switch (item.getItemId()){
             case R.id.action_delete:
-                    builder.setMessage("¿Esta seguro que desea eliminar esta categoria?")
-                            .setTitle("Eliminacion")
+                    builder.setMessage("¿Esta seguro que desea eliminar esta Categoría?")
+                            .setTitle("Eliminación")
                             .setNegativeButton("NO",null)
                             .setPositiveButton("SI",(dialog, which) -> categoriasViewModel.deleteCategoriaForResult(categoria) );
                     AlertDialog dialog = builder.create();
@@ -167,8 +167,8 @@ public class CategoriaEditFragment extends Fragment {
             case R.id.action_checkout:
                 // todo: revisar la ortografia de todos los mensajes dialog
 
-                    builder.setMessage("¿Desea confirmar los cambios en la categoria?")
-                            .setTitle("Actualizacion")
+                    builder.setMessage("¿Desea confirmar los cambios en la Categoría?")
+                            .setTitle("Actualización")
                             .setNegativeButton("NO",null)
                             .setPositiveButton("SI",(dialog2, which) -> {
                                 String oldCategoria = categoria.nombre;

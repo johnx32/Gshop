@@ -65,7 +65,7 @@ public class ProductoEditFragment extends Fragment {
                     public void onChanged(Integer integer) {
                         if (integer > 0){
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("El producto se elmino exitosamente")
+                            builder.setMessage("El Producto se eliminó exitosamente")
                                     .setTitle("Eliminar")
                                     .setPositiveButton("OK", null);
                             AlertDialog dialog = builder.create();
@@ -89,7 +89,7 @@ public class ProductoEditFragment extends Fragment {
                     public void onChanged(Integer integer) {
                         if (integer > 0) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("El producto se Actualizo con exito")
+                            builder.setMessage("El Producto se actualizó con éxito")
                                     .setTitle("Actualizado")
                                     .setPositiveButton("OK", null);
                             AlertDialog dialog = builder.create();
@@ -98,7 +98,7 @@ public class ProductoEditFragment extends Fragment {
                                     .popBackStack();
                         } else{
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("El producto se no se Actualizo")
+                            builder.setMessage("El Producto no se pudo actualizar")
                                     .setTitle("Error")
                                     .setPositiveButton("OK", null);
                             AlertDialog dialog = builder.create();
@@ -195,7 +195,7 @@ public class ProductoEditFragment extends Fragment {
                 break;
             case R.id.action_checkout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage("Esta seguro que desea guardar los cambios en el producto")
+                builder.setMessage("¿Esta seguro que desea guardar los cambios en el Producto?")
                         .setTitle("Actualizar")
                         .setNegativeButton("NO",null)
                         .setPositiveButton("SI",(dialog, which) -> {
