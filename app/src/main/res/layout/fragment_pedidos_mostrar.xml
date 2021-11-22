@@ -22,7 +22,7 @@
         android:layout_marginTop="20dp"
         android:text="Código del Pedido:" />
 
-    <EditText
+    <TextView
         android:id="@+id/et_codigo_pedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:layout_marginTop="16dp"
         android:text="Fecha del pedido:"/>
 
-    <EditText
+    <TextView
         android:id="@+id/et_fecha_pedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -39,4 +39,7 @@ public interface CategoriaDao {
 
     @Query("delete from Categoria")
     Single<Integer> clearCategoria();
+
+    @Insert
+    Single<Long> insertCategoria(Categoria categoria);
 }

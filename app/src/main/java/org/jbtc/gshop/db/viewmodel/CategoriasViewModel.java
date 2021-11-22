@@ -86,10 +86,10 @@ public class CategoriasViewModel extends AndroidViewModel {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference cat = mDatabase.child("categorias").child(categoria.nombre);
         String key = cat.push().getKey();
-        categoria.nombre = key;
-        cat.child(key).setValue(categoria)
+        categoria.nombre = categoria.nombre;
+        cat.child(categoria.nombre).setValue(categoria)
                 .addOnSuccessListener(used -> {
-                    categoriaDao.insertCategorias((List<Categoria>) categoria)
+                    categoriaDao.insertCategoria(categoria)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe((integer, throwable) -> {
