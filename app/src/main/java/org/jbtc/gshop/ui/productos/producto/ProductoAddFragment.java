@@ -1,6 +1,16 @@
 package org.jbtc.gshop.ui.productos.producto;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,35 +20,25 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.squareup.picasso.Picasso;
 
 import org.jbtc.gshop.R;
-import org.jbtc.gshop.databinding.FragmentCategoriaEditBinding;
 import org.jbtc.gshop.databinding.FragmentProductoAddBinding;
+import org.jbtc.gshop.db.entity.Categoria;
 import org.jbtc.gshop.db.entity.Producto;
 import org.jbtc.gshop.db.viewmodel.CategoriasViewModel;
 import org.jbtc.gshop.db.viewmodel.ProductosViewModel;
-import org.jbtc.gshop.ui.categorias.categoria.CategoriaEditFragment;
 
-import io.reactivex.functions.BiConsumer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductoAddFragment extends Fragment {
 
     private FragmentProductoAddBinding binding;
     private Producto producto;
     private ProductosViewModel productosViewModel;
+    private CategoriasViewModel categoriasViewModel;
+    private List<Categoria> categoriaList;
     private static final String TAG = "crmsl";
 
     @Override
@@ -52,7 +52,7 @@ public class ProductoAddFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding =  FragmentProductoAddBinding.inflate(inflater,container,false);
         productosViewModel = new ViewModelProvider(this).get(ProductosViewModel.class);
-
+        categoriasViewModel = new ViewModelProvider(this).get(CategoriasViewModel.class);
 
         return binding.getRoot();
     }
@@ -83,6 +83,14 @@ public class ProductoAddFragment extends Fragment {
                 Log.i(TAG, "afterTextChanged:after  s: "+s.toString());
             }
         });
+
+        categoriasViewModel.getAllCategoria()
+                .subscribe((categorias, throwable) -> {
+                    if(throwable==null){
+                        categoriaList=categorias;
+                        setCategoriasToSpinner(categorias);
+                    }
+                });
     }
 
     private Producto getProductoFromLayout() {
@@ -91,7 +99,7 @@ public class ProductoAddFragment extends Fragment {
         p.descripcion = binding.etProdAddDescip.getText().toString();
         p.precio = Integer.parseInt(binding.etProdAddPrecio.getText().toString());
         p.url = binding.etProdAddUrl.getText().toString();
-        p.name_categoria = "ropa";
+        p.name_categoria =  categoriaList.get( binding.spProdAddCategorias.getSelectedItemPosition() ).nombre;
 
         return p;
     }
@@ -123,6 +131,34 @@ public class ProductoAddFragment extends Fragment {
 
                     }
                 });
+    }
+
+    private void setCategoriasToSpinner(List<Categoria> categorias) {
+        if(categorias.size()>0) {
+            List<String> categorias_name = new ArrayList<>();
+
+            int categoriaSelected = 0;
+            for (int i = 0; i < categorias.size(); i++) {
+                categorias_name.add(categorias.get(i).nombre);
+                if (producto!=null &&
+                        producto.name_categoria.equals(categorias.get(i).nombre))
+                    categoriaSelected = i;
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                    android.R.layout.simple_list_item_1, categorias_name);
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            binding.spProdAddCategorias.setAdapter(adapter);
+
+            binding.spProdAddCategorias.setSelection(categoriaSelected);
+        }else{
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                    android.R.layout.simple_list_item_1, new String[]{"Sin Categoria"});
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            binding.spProdAddCategorias.setAdapter(adapter);
+        }
     }
 
     @Override

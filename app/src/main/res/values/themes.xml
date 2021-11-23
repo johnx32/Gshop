@@ -14,6 +14,8 @@
         <!-- Customize your theme here. -->
         <item name="floatingActionButtonStyle">@style/floating</item>
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
+
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
 
@@ -22,6 +24,7 @@
     <style name="Theme.Gshop.NoActionBar" >
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="Theme.Gshop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
