@@ -10,7 +10,7 @@
 
     <color name="primario">#FF9800</color>
     <color name="primario_dark">#FF8F00</color>
-
+    <color name="color_accent">#979797</color>
     <color name="silver">#979797</color>
     <color name="red">#F44336</color>
 

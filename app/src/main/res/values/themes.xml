@@ -19,7 +19,7 @@
 
 
     <!--  theme activity  -->
-    <style name="Theme.Gshop.NoActionBar">
+    <style name="Theme.Gshop.NoActionBar" >
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
@@ -27,4 +27,11 @@
     <style name="Theme.Gshop.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Gshop.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SplashTheme" parent="Theme.Gshop.NoActionBar">
+        <item name="colorPrimary">@color/design_default_color_primary</item>
+        <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
 </resources>
