@@ -4,7 +4,6 @@ import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -17,7 +16,6 @@ import org.jbtc.gshop.db.GshopRoom;
 import org.jbtc.gshop.db.dao.CategoriaDao;
 import org.jbtc.gshop.db.dao.ProductoDao;
 import org.jbtc.gshop.db.entity.Categoria;
-import org.jbtc.gshop.db.entity.Producto;
 
 import java.util.List;
 
@@ -84,10 +82,10 @@ public class CategoriasViewModel extends AndroidViewModel {
     public void insertCategoriaResult(Categoria categoria) {
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference cat = mDatabase.child("categorias").child(categoria.nombre);
-        String key = cat.push().getKey();
-        categoria.nombre = categoria.nombre;
-        cat.child(categoria.nombre).setValue(categoria)
+        DatabaseReference cat = mDatabase.child("categorias");//.child(categoria.nombre);
+        //String key = cat.push().getKey();
+        //categoria.nombre = categoria.nombre;
+        cat.child(categoria.nombre).setValue(categoria.nombre)
                 .addOnSuccessListener(used -> {
                     categoriaDao.insertCategoria(categoria)
                             .subscribeOn(Schedulers.io())
