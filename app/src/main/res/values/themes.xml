@@ -15,7 +15,7 @@
         <item name="floatingActionButtonStyle">@style/floating</item>
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
 
-        <item name="android:windowBackground">@drawable/splash_background</item>
+        <!--<item name="android:windowBackground">@drawable/splash_background</item>-->
     </style>
 
 
